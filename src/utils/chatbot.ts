@@ -1,135 +1,365 @@
 import {
-  portfolioData,
-} from "../data/portfolioData";
+  chatbotData,
+} from "../data/chatbotData";
 
-export function generateChatbotResponse(
+function normalizeText(
+  value: string
+) {
+  return value
+    .toLowerCase()
+    .trim();
+}
+
+function includesAny(
+  value: string,
+  words: string[]
+) {
+  return words.some(
+    (
+      word
+    ) =>
+      value.includes(
+        word
+      )
+  );
+}
+
+export function getChatbotResponse(
   message: string
 ): string {
   const text =
-    message.toLowerCase().trim();
+    normalizeText(
+      message
+    );
 
-  // About
   if (
-    text.includes("who is") ||
-    text.includes("about") ||
-    text.includes("yuusuf")
+    includesAny(
+      text,
+      [
+        "hello",
+        "hi",
+        "hey",
+        "salam",
+        "asc",
+      ]
+    )
   ) {
-    if (
-      !text.includes("skill") &&
-      !text.includes("project") &&
-      !text.includes("contact") &&
-      !text.includes("learn") &&
-      !text.includes("experience")
-    ) {
-      return `${portfolioData.personal.name} is a ${portfolioData.personal.role} from ${portfolioData.personal.location}. He focuses on building modern, scalable, responsive and user-friendly web applications.`;
-    }
+    return `Hi! I'm Yuusuf's portfolio assistant. You can ask me about his experience, 32+ professional projects, Heegan Technology, TechPoint, skills, education, activities, articles, current learning or contact information.`;
   }
 
-  // Frontend
   if (
-    text.includes("frontend") ||
-    text.includes("front end")
+    includesAny(
+      text,
+      [
+        "who is",
+        "about yuusuf",
+        "about",
+        "tell me about",
+        "yuusuf adow",
+      ]
+    )
   ) {
-    return `Yuusuf's frontend technologies include ${portfolioData.skills.frontend.join(
-      ", "
-    )}.`;
+    return chatbotData
+      .personal
+      .summary;
   }
 
-  // Backend
   if (
-    text.includes("backend") ||
-    text.includes("back end")
+    includesAny(
+      text,
+      [
+        "education",
+        "university",
+        "degree",
+        "zamzam",
+        "school",
+        "graduate",
+      ]
+    )
   ) {
-    return `For backend development, Yuusuf works with ${portfolioData.skills.backend.join(
-      ", "
-    )}. He also works with ${portfolioData.skills.databases.join(
-      " and "
-    )} for databases.`;
+    return `${chatbotData.personal.education} His Information Technology background includes software development, databases, web technologies, systems analysis and IT-related problem solving.`;
   }
 
-  // Skills
   if (
-    text.includes("skill") ||
-    text.includes("technolog") ||
-    text.includes("stack")
+    includesAny(
+      text,
+      [
+        "heegan website",
+        "heegan technology website",
+        "who built heegan",
+        "built heegan",
+      ]
+    )
   ) {
-    return `Yuusuf works with ${[
-      ...portfolioData.skills.frontend,
-      ...portfolioData.skills.backend,
-      ...portfolioData.skills.databases,
-    ].join(", ")}.`;
+    return `Yuusuf built the public Heegan Technology website as part of his work as a Frontend Developer at Heegan Technology. You can visit it at ${chatbotData.experience.heeganWebsite.url}`;
   }
 
-  // Projects
   if (
-    text.includes("project") ||
-    text.includes("work")
+    includesAny(
+      text,
+      [
+        "heegan",
+        "experience",
+        "work",
+        "job",
+        "frontend developer",
+        "employment",
+      ]
+    )
+  ) {
+    return `Yuusuf works as a Frontend Developer at Heegan Technology, where he builds modern websites, dashboards and software interfaces. He also built the public Heegan Technology website. His professional development experience includes more than 32 production and client projects.`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "32",
+        "32+",
+        "professional project",
+        "client project",
+        "production project",
+      ]
+    )
+  ) {
+    return `Yuusuf has worked on 32+ professional and production projects. These include websites, business platforms, admin dashboards, public-sector and ministry-related websites, pharmacy systems, hospital and healthcare systems, and custom web applications. Many client projects are confidential, so their names, screenshots and internal details are not publicly presented.`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "confidential",
+        "private project",
+        "ministry",
+        "hospital",
+        "pharmacy",
+        "business website",
+      ]
+    )
+  ) {
+    return chatbotData
+      .projects
+      .confidentialMessage;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "project",
+        "portfolio work",
+        "built",
+        "build",
+      ]
+    )
   ) {
     const projects =
-      portfolioData.projects
+      chatbotData.projects.publicProjects
         .map(
-          (project) =>
-            `${project.title} — ${project.description}`
+          (
+            project
+          ) =>
+            project.title
         )
-        .join("\n\n");
+        .join(", ");
 
-    return `Here are some of Yuusuf's projects:\n\n${projects}`;
+    return `Yuusuf has worked on 32+ professional and production projects. Public portfolio work includes ${projects}. Some professional client projects cannot be publicly presented because of confidentiality.`;
   }
 
-  // Experience
   if (
-    text.includes("experience") ||
-    text.includes("company") ||
-    text.includes("job")
+    includesAny(
+      text,
+      [
+        "skill",
+        "technology",
+        "technologies",
+        "stack",
+        "programming",
+        "frontend",
+        "backend",
+        "database",
+      ]
+    )
   ) {
-    return `Yuusuf has worked as a ${portfolioData.experience.role} at ${portfolioData.experience.company}. ${portfolioData.experience.description.trim()}`;
+    return `Yuusuf's frontend stack includes ${chatbotData.skills.frontend.join(", ")}. His backend technologies include ${chatbotData.skills.backend.join(", ")}. He works with ${chatbotData.skills.databases.join(" and ")} databases, REST APIs, API integration, Git, GitHub and Odoo.`;
   }
 
-  // Learning
   if (
-    text.includes("learn") ||
-    text.includes("currently") ||
-    text.includes("studying")
+    includesAny(
+      text,
+      [
+        "techpoint",
+        "ceo",
+        "co-founder",
+        "founder",
+        "company",
+      ]
+    )
   ) {
-    return `Yuusuf is currently strengthening his skills in ${portfolioData.learning.join(
-      ", "
-    )}.`;
+    return `${chatbotData.experience.techpoint.description} TechPoint: ${chatbotData.experience.techpoint.facebook}`;
   }
 
-  // Contact
   if (
-    text.includes("contact") ||
-    text.includes("email") ||
-    text.includes("hire") ||
-    text.includes("reach")
+    includesAny(
+      text,
+      [
+        "certificate",
+        "certification",
+        "rise academy",
+      ]
+    )
   ) {
-    return `You can contact Yuusuf at ${portfolioData.contact.email}. You can also connect with him through GitHub or LinkedIn using the links available on this portfolio.`;
+    return `Yuusuf completed a Full-Stack Development certificate from Rise Academy. He is currently learning through the IBM JavaScript Backend Developer Professional Certificate and The Complete Node.js Backend Developer Bootcamp (2026).`;
   }
 
-  // GitHub
   if (
-    text.includes("github") ||
-    text.includes("repository") ||
-    text.includes("repo")
+    includesAny(
+      text,
+      [
+        "learning",
+        "currently learning",
+        "course",
+        "node bootcamp",
+        "ibm",
+        "coursera",
+      ]
+    )
   ) {
-    return `You can view Yuusuf's GitHub profile here: ${portfolioData.contact.github}`;
+    return `Yuusuf is currently learning through the IBM JavaScript Backend Developer Professional Certificate and The Complete Node.js Backend Developer Bootcamp (2026). His current focus includes backend engineering, Node.js, Express.js, REST APIs, database design and full-stack architecture.`;
   }
 
-  // LinkedIn
-  if (text.includes("linkedin")) {
-    return `You can connect with Yuusuf on LinkedIn here: ${portfolioData.contact.linkedin}`;
+  if (
+    includesAny(
+      text,
+      [
+        "future",
+        "goal",
+        "information security",
+        "security",
+        "data science",
+        "artificial intelligence",
+        " ai ",
+      ]
+    )
+  ) {
+    return `Yuusuf's future goals include pursuing professional certification and deeper engineering knowledge in Information Security, as well as professional certification and deeper knowledge in Data Science with AI.`;
   }
 
-  return `
-I can help you learn more about Yuusuf.
+  if (
+    includesAny(
+      text,
+      [
+        "activity",
+        "activities",
+        "community",
+        "volunteer",
+        "pycon",
+        "ai somalia",
+      ]
+    )
+  ) {
+    return `Yuusuf's community activities include being an AI Somalia Organizer & Protocol Team Member in 2026, participating in PyCon Somalia on 3 September 2025, and volunteering with Zamzam University on 4 June 2025.`;
+  }
 
-Try asking me about:
-• His skills
-• Frontend technologies
-• Backend technologies
-• Projects
-• Experience
-• What he's learning
-• Contact information
-  `.trim();
+  if (
+    includesAny(
+      text,
+      [
+        "article",
+        "articles",
+        "blog",
+        "writing",
+        "notes",
+      ]
+    )
+  ) {
+    return `Yuusuf is building an articles section where he documents software development and learning topics such as frontend-to-full-stack development, Node.js backend engineering, REST APIs, databases, visual thinking, Information Security, Data Science and AI.`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "design",
+        "designer",
+        "graphic",
+        "visual",
+      ]
+    )
+  ) {
+    return `Alongside software development, Yuusuf works as a Visual Graphic Designer and brings visual thinking into his digital work and software interfaces.`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "linkedin",
+      ]
+    )
+  ) {
+    return `Yuusuf's LinkedIn: ${chatbotData.social.linkedin}`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "github",
+      ]
+    )
+  ) {
+    return `Yuusuf's GitHub: ${chatbotData.social.github}`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "tiktok",
+      ]
+    )
+  ) {
+    return `Yuusuf's TikTok: ${chatbotData.social.tiktok}`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "instagram",
+      ]
+    )
+  ) {
+    return `Yuusuf's Instagram: ${chatbotData.social.instagram}`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "facebook",
+      ]
+    )
+  ) {
+    return `Yuusuf's Facebook: ${chatbotData.social.facebook}`;
+  }
+
+  if (
+    includesAny(
+      text,
+      [
+        "contact",
+        "email",
+        "hire",
+        "reach",
+        "connect",
+      ]
+    )
+  ) {
+    return `You can contact Yuusuf at ${chatbotData.contact.email}. You can also connect through LinkedIn, GitHub, Facebook, Instagram or TikTok.`;
+  }
+
+  return `I can help you learn more about Yuusuf's experience, Heegan Technology, 32+ professional projects, TechPoint, skills, education, certificates, current learning, activities, articles and contact information.`;
 }

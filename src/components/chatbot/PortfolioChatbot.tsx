@@ -23,7 +23,7 @@ import {
 } from "../../data/chatbotData";
 
 import {
-  generateChatbotResponse,
+  getChatbotResponse,
 } from "../../utils/chatbot";
 
 import type {
@@ -93,7 +93,7 @@ export default function PortfolioChatbot() {
 
     window.setTimeout(() => {
       const response =
-        generateChatbotResponse(
+        getChatbotResponse(
           trimmed
         );
 
