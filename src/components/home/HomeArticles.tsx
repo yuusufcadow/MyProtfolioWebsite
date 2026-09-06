@@ -15,39 +15,6 @@ import {
   articles,
 } from "../../data/articlesData";
 
-const reveal = {
-  initial: {
-    opacity: 0,
-    y: 24,
-  },
-
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-
-  viewport: {
-    once: true,
-    amount: 0.1,
-  },
-
-  transition: {
-    duration: 0.6,
-
-    ease: [
-      0.22,
-      1,
-      0.36,
-      1,
-    ] as [
-      number,
-      number,
-      number,
-      number,
-    ],
-  },
-};
-
 export default function HomeArticles() {
   const latestArticles =
     articles.slice(
@@ -85,7 +52,20 @@ export default function HomeArticles() {
         "
       >
         <motion.div
-          {...reveal}
+          initial={{
+            opacity: 0,
+            y: 24,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
           className="
             flex
             flex-col
@@ -98,13 +78,25 @@ export default function HomeArticles() {
           "
         >
           <div>
-            
+            <p
+              className="
+                text-[10px]
+                font-semibold
+
+                uppercase
+                tracking-[0.2em]
+
+                text-zinc-400
+              "
+            >
+              Latest writing
+            </p>
 
             <h2
               className="
                 mt-5
 
-                max-w-[800px]
+                max-w-[820px]
 
                 text-[clamp(2.4rem,6vw,5rem)]
 
@@ -113,13 +105,9 @@ export default function HomeArticles() {
                 leading-[1]
 
                 tracking-[-0.055em]
-
-                text-zinc-950
-
-                dark:text-white
               "
             >
-              Latest{" "}
+              Notes from{" "}
               <span
                 className="
                   text-zinc-400
@@ -127,7 +115,7 @@ export default function HomeArticles() {
                   dark:text-zinc-600
                 "
               >
-                Articles
+                production work.
               </span>
             </h2>
           </div>
@@ -151,10 +139,7 @@ export default function HomeArticles() {
               text-sm
               font-medium
 
-              text-zinc-950
-
               dark:border-white
-              dark:text-white
             "
           >
             View all articles
@@ -163,7 +148,6 @@ export default function HomeArticles() {
               size={15}
               className="
                 transition-transform
-                duration-300
 
                 group-hover:translate-x-1
               "
@@ -206,7 +190,6 @@ export default function HomeArticles() {
                 }}
                 viewport={{
                   once: true,
-                  amount: 0.12,
                 }}
                 transition={{
                   duration: 0.55,
@@ -217,92 +200,36 @@ export default function HomeArticles() {
                 }}
                 className="
                   group
-                  relative
 
                   min-h-[360px]
-
-                  overflow-hidden
 
                   border
                   border-zinc-200
 
-                  bg-white
-
                   transition-colors
-                  duration-300
 
-                  hover:border-zinc-300
                   hover:bg-zinc-50
 
-                  sm:min-h-[390px]
-
                   dark:border-white/10
-                  dark:bg-[#09090b]
 
-                  dark:hover:border-white/20
                   dark:hover:bg-white/[0.025]
                 "
               >
                 <Link
                   to={`/articles/${article.slug}`}
                   className="
-                    relative
-                    z-10
-
                     flex
-                    h-full
                     min-h-[360px]
                     flex-col
 
                     p-6
 
-                    sm:min-h-[390px]
                     sm:p-7
-
                     lg:p-8
                   "
                 >
-                  <span
-                    className="
-                      pointer-events-none
-
-                      absolute
-
-                      -bottom-8
-                      right-2
-
-                      select-none
-
-                      font-mono
-
-                      text-[6rem]
-
-                      leading-none
-
-                      tracking-[-0.1em]
-
-                      text-zinc-100
-
-                      transition-colors
-                      duration-500
-
-                      group-hover:text-blue-50
-
-                      sm:text-[7rem]
-
-                      dark:text-white/[0.02]
-
-                      dark:group-hover:text-blue-400/[0.035]
-                    "
-                  >
-                    {article.id}
-                  </span>
-
                   <div
                     className="
-                      relative
-                      z-10
-
                       flex
                       items-center
                       justify-between
@@ -334,41 +261,29 @@ export default function HomeArticles() {
                         text-zinc-400
                       "
                     >
-                      {article.status}
+                      {article.category}
                     </span>
                   </div>
 
                   <div
                     className="
-                      relative
-                      z-10
-
                       mt-12
-
-                      sm:mt-14
                     "
                   >
                     <h3
                       className="
-                        max-w-md
-
                         text-xl
                         font-medium
 
-                        leading-[1.18]
+                        leading-[1.2]
 
                         tracking-[-0.04em]
 
-                        text-zinc-950
-
                         transition-colors
-                        duration-300
 
                         group-hover:text-blue-600
 
                         sm:text-2xl
-
-                        dark:text-white
 
                         dark:group-hover:text-blue-400
                       "
@@ -379,7 +294,6 @@ export default function HomeArticles() {
                     <p
                       className="
                         mt-5
-                        max-w-md
 
                         text-sm
                         leading-7
@@ -395,9 +309,6 @@ export default function HomeArticles() {
 
                   <div
                     className="
-                      relative
-                      z-10
-
                       mt-auto
 
                       pt-10
@@ -409,8 +320,6 @@ export default function HomeArticles() {
                         items-center
                         justify-between
 
-                        gap-5
-
                         border-t
                         border-zinc-200
 
@@ -419,58 +328,21 @@ export default function HomeArticles() {
                         dark:border-white/10
                       "
                     >
-                      <div
+                      <span
                         className="
-                          flex
-                          flex-wrap
-                          items-center
+                          text-[10px]
 
-                          gap-3
+                          text-zinc-400
                         "
                       >
-                        <span
-                          className="
-                            font-mono
-
-                            text-[9px]
-
-                            uppercase
-                            tracking-[0.14em]
-
-                            text-zinc-400
-                          "
-                        >
-                          {article.date}
-                        </span>
-
-                        <span
-                          className="
-                            h-1
-                            w-1
-
-                            bg-zinc-300
-
-                            dark:bg-zinc-700
-                          "
-                        />
-
-                        <span
-                          className="
-                            text-[9px]
-
-                            text-zinc-400
-                          "
-                        >
-                          {article.readTime}
-                        </span>
-                      </div>
+                        {article.readTime}
+                      </span>
 
                       <span
                         className="
                           flex
                           h-10
                           w-10
-                          shrink-0
                           items-center
                           justify-center
 
@@ -480,14 +352,12 @@ export default function HomeArticles() {
                           text-zinc-500
 
                           transition-all
-                          duration-300
 
                           group-hover:border-blue-600
                           group-hover:bg-blue-600
                           group-hover:text-white
 
                           dark:border-white/10
-                          dark:text-zinc-400
 
                           dark:group-hover:border-blue-400
                           dark:group-hover:bg-blue-400
@@ -496,13 +366,6 @@ export default function HomeArticles() {
                       >
                         <FiArrowUpRight
                           size={15}
-                          className="
-                            transition-transform
-                            duration-300
-
-                            group-hover:-translate-y-0.5
-                            group-hover:translate-x-0.5
-                          "
                         />
                       </span>
                     </div>
@@ -512,41 +375,6 @@ export default function HomeArticles() {
             )
           )}
         </div>
-
-        <motion.div
-          initial={{
-            scaleX: 0,
-          }}
-          whileInView={{
-            scaleX: 1,
-          }}
-          viewport={{
-            once: true,
-          }}
-          transition={{
-            duration: 0.9,
-
-            ease: [
-              0.22,
-              1,
-              0.36,
-              1,
-            ],
-          }}
-          className="
-            mt-14
-            h-px
-            w-full
-
-            origin-left
-
-            bg-zinc-200
-
-            sm:mt-16
-
-            dark:bg-white/10
-          "
-        />
       </div>
     </section>
   );

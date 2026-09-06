@@ -17,6 +17,18 @@ import {
   articles,
 } from "../data/articlesData";
 
+const ease = [
+  0.22,
+  1,
+  0.36,
+  1,
+] as [
+  number,
+  number,
+  number,
+  number,
+];
+
 const reveal = {
   initial: {
     opacity: 0,
@@ -35,18 +47,7 @@ const reveal = {
 
   transition: {
     duration: 0.65,
-
-    ease: [
-      0.22,
-      1,
-      0.36,
-      1,
-    ] as [
-      number,
-      number,
-      number,
-      number,
-    ],
+    ease,
   },
 };
 
@@ -58,9 +59,10 @@ export default function ArticleDetails() {
   const articleIndex =
     articles.findIndex(
       (
-        item
+        article
       ) =>
-        item.slug === slug
+        article.slug ===
+        slug
     );
 
   const article =
@@ -78,9 +80,13 @@ export default function ArticleDetails() {
           min-h-screen
           items-center
           justify-center
+
           bg-white
+
           px-4
+
           text-zinc-950
+
           dark:bg-[#09090b]
           dark:text-white
         "
@@ -89,20 +95,28 @@ export default function ArticleDetails() {
           className="
             w-full
             max-w-2xl
+
             border-y
             border-zinc-200
-            py-14
+
+            py-16
+
             text-center
+
             dark:border-white/10
           "
         >
           <p
             className="
               font-mono
+
               text-[10px]
+
               uppercase
               tracking-[0.2em]
+
               text-blue-600
+
               dark:text-blue-400
             "
           >
@@ -112,9 +126,12 @@ export default function ArticleDetails() {
           <h1
             className="
               mt-5
+
               text-4xl
               font-medium
+
               tracking-[-0.055em]
+
               sm:text-5xl
             "
           >
@@ -125,21 +142,30 @@ export default function ArticleDetails() {
             to="/articles"
             className="
               group
+
               mt-8
+
               inline-flex
               items-center
+
               gap-3
+
               border-b
               border-zinc-950
+
               pb-2
+
               text-sm
               font-medium
+
               dark:border-white
             "
           >
             <FiArrowLeft
+              size={15}
               className="
                 transition-transform
+
                 group-hover:-translate-x-1
               "
             />
@@ -154,15 +180,18 @@ export default function ArticleDetails() {
   const nextArticle =
     articles[
       articleIndex + 1
-    ] || articles[0];
+    ] ||
+    articles[0];
 
   return (
     <main
       className="
         min-h-screen
         overflow-hidden
+
         bg-white
         text-zinc-950
+
         dark:bg-[#09090b]
         dark:text-white
       "
@@ -170,24 +199,31 @@ export default function ArticleDetails() {
       <section
         className="
           relative
+
           px-4
-          pb-16
-          pt-[100px]
+          pb-20
+          pt-[105px]
+
           sm:px-6
-          sm:pb-20
-          sm:pt-[115px]
+          sm:pb-24
+          sm:pt-[120px]
+
           md:px-8
+
           lg:px-10
-          lg:pb-24
-          lg:pt-[130px]
+          lg:pb-28
+          lg:pt-[140px]
         "
       >
         <div
           className="
             pointer-events-none
+
             absolute
             inset-0
+
             opacity-[0.025]
+
             dark:opacity-[0.035]
           "
           style={{
@@ -203,6 +239,7 @@ export default function ArticleDetails() {
                 transparent 1px
               )
             `,
+
             backgroundSize:
               "80px 80px",
           }}
@@ -212,6 +249,7 @@ export default function ArticleDetails() {
           className="
             relative
             z-10
+
             mx-auto
             max-w-[1400px]
           "
@@ -233,15 +271,23 @@ export default function ArticleDetails() {
               to="/articles"
               className="
                 group
+
                 inline-flex
                 items-center
+
                 gap-3
+
                 text-xs
                 font-medium
+
                 text-zinc-500
+
                 transition-colors
+
                 hover:text-zinc-950
+
                 dark:text-zinc-400
+
                 dark:hover:text-white
               "
             >
@@ -249,6 +295,7 @@ export default function ArticleDetails() {
                 size={14}
                 className="
                   transition-transform
+
                   group-hover:-translate-x-1
                 "
               />
@@ -260,8 +307,10 @@ export default function ArticleDetails() {
           <div
             className="
               mt-12
+
               grid
               gap-10
+
               lg:grid-cols-[0.22fr_1fr]
               lg:gap-16
             "
@@ -279,15 +328,15 @@ export default function ArticleDetails() {
                 delay: 0.15,
                 duration: 0.6,
               }}
-              className="
-                lg:pt-3
-              "
             >
               <span
                 className="
                   font-mono
+
                   text-xs
+
                   text-blue-600
+
                   dark:text-blue-400
                 "
               >
@@ -297,8 +346,10 @@ export default function ArticleDetails() {
               <div
                 className="
                   mt-5
+
                   border-t
                   border-zinc-200
+
                   dark:border-white/10
                 "
               >
@@ -306,29 +357,34 @@ export default function ArticleDetails() {
                   className="
                     border-b
                     border-zinc-200
+
                     py-4
+
                     dark:border-white/10
                   "
                 >
                   <p
                     className="
                       text-[9px]
+
                       uppercase
                       tracking-[0.18em]
+
                       text-zinc-400
                     "
                   >
-                    Status
+                    Type
                   </p>
 
                   <p
                     className="
                       mt-2
+
                       text-sm
                       font-medium
                     "
                   >
-                    {article.status}
+                    Engineering Note
                   </p>
                 </div>
 
@@ -336,29 +392,34 @@ export default function ArticleDetails() {
                   className="
                     border-b
                     border-zinc-200
+
                     py-4
+
                     dark:border-white/10
                   "
                 >
                   <p
                     className="
                       text-[9px]
+
                       uppercase
                       tracking-[0.18em]
+
                       text-zinc-400
                     "
                   >
-                    Date
+                    Topic
                   </p>
 
                   <p
                     className="
                       mt-2
+
                       text-sm
                       font-medium
                     "
                   >
-                    {article.date}
+                    {article.category}
                   </p>
                 </div>
 
@@ -366,15 +427,19 @@ export default function ArticleDetails() {
                   className="
                     border-b
                     border-zinc-200
+
                     py-4
+
                     dark:border-white/10
                   "
                 >
                   <p
                     className="
                       text-[9px]
+
                       uppercase
                       tracking-[0.18em]
+
                       text-zinc-400
                     "
                   >
@@ -384,6 +449,7 @@ export default function ArticleDetails() {
                   <p
                     className="
                       mt-2
+
                       text-sm
                       font-medium
                     "
@@ -409,24 +475,57 @@ export default function ArticleDetails() {
                   }}
                   transition={{
                     duration: 0.85,
-                    ease: [
-                      0.22,
-                      1,
-                      0.36,
-                      1,
-                    ],
+                    ease,
                   }}
                   className="
                     max-w-[1050px]
+
                     text-[clamp(2.8rem,7vw,6.8rem)]
+
                     font-medium
+
                     leading-[0.95]
+
                     tracking-[-0.06em]
                   "
                 >
                   {article.title}
                 </motion.h1>
               </div>
+
+              {article.subtitle && (
+                <motion.p
+                  initial={{
+                    opacity: 0,
+                    y: 18,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: 0.22,
+                    duration: 0.6,
+                  }}
+                  className="
+                    mt-7
+                    max-w-3xl
+
+                    text-lg
+                    font-medium
+
+                    leading-8
+
+                    text-zinc-700
+
+                    sm:text-xl
+
+                    dark:text-zinc-300
+                  "
+                >
+                  {article.subtitle}
+                </motion.p>
+              )}
 
               <motion.p
                 initial={{
@@ -438,22 +537,69 @@ export default function ArticleDetails() {
                   y: 0,
                 }}
                 transition={{
-                  delay: 0.25,
+                  delay: 0.3,
                   duration: 0.65,
                 }}
                 className="
-                  mt-8
+                  mt-7
                   max-w-3xl
+
                   text-base
                   leading-8
+
                   text-zinc-500
+
                   sm:text-lg
                   sm:leading-9
+
                   dark:text-zinc-400
                 "
               >
                 {article.excerpt}
               </motion.p>
+
+              <motion.div
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: 1,
+                }}
+                transition={{
+                  delay: 0.45,
+                }}
+                className="
+                  mt-9
+
+                  flex
+                  flex-wrap
+
+                  gap-x-5
+                  gap-y-3
+                "
+              >
+                {article.tags.map(
+                  (
+                    tag
+                  ) => (
+                    <span
+                      key={
+                        tag
+                      }
+                      className="
+                        text-xs
+                        font-medium
+
+                        text-zinc-500
+
+                        dark:text-zinc-400
+                      "
+                    >
+                      {tag}
+                    </span>
+                  )
+                )}
+              </motion.div>
             </div>
           </div>
         </div>
@@ -463,27 +609,35 @@ export default function ArticleDetails() {
         className="
           border-t
           border-zinc-200
+
           px-4
+
           sm:px-6
           md:px-8
           lg:px-10
+
           dark:border-white/10
         "
       >
         <div
           className="
             mx-auto
+
             grid
             max-w-[1400px]
+
             gap-12
+
             py-16
+
             sm:py-20
+
             lg:grid-cols-[0.22fr_1fr]
             lg:gap-16
             lg:py-28
           "
         >
-          <motion.div
+          <motion.aside
             {...reveal}
             className="
               lg:sticky
@@ -495,6 +649,7 @@ export default function ArticleDetails() {
               size={19}
               className="
                 text-blue-600
+
                 dark:text-blue-400
               "
             />
@@ -502,10 +657,13 @@ export default function ArticleDetails() {
             <p
               className="
                 mt-5
+
                 text-[10px]
                 font-semibold
+
                 uppercase
                 tracking-[0.2em]
+
                 text-zinc-400
               "
             >
@@ -516,17 +674,21 @@ export default function ArticleDetails() {
               className="
                 mt-4
                 max-w-[230px]
+
                 text-sm
                 leading-7
+
                 text-zinc-500
+
                 dark:text-zinc-400
               "
             >
-              Notes from my ongoing
-              software development and
-              learning journey.
+              Practical notes from my
+              engineering, production
+              and development
+              experience.
             </p>
-          </motion.div>
+          </motion.aside>
 
           <article
             className="
@@ -552,7 +714,7 @@ export default function ArticleDetails() {
                   }}
                   viewport={{
                     once: true,
-                    amount: 0.15,
+                    amount: 0.12,
                   }}
                   transition={{
                     duration: 0.6,
@@ -563,8 +725,14 @@ export default function ArticleDetails() {
                   className="
                     border-t
                     border-zinc-200
+
                     py-10
+
+                    first:border-t-0
                     first:pt-0
+
+                    sm:py-12
+
                     dark:border-white/10
                   "
                 >
@@ -572,6 +740,7 @@ export default function ArticleDetails() {
                     className="
                       grid
                       gap-5
+
                       sm:grid-cols-[60px_1fr]
                       sm:gap-8
                     "
@@ -579,8 +748,11 @@ export default function ArticleDetails() {
                     <span
                       className="
                         font-mono
+
                         text-[10px]
+
                         text-blue-600
+
                         dark:text-blue-400
                       "
                     >
@@ -599,18 +771,24 @@ export default function ArticleDetails() {
                         className="
                           text-2xl
                           font-medium
+
                           tracking-[-0.045em]
+
                           sm:text-3xl
+
                           lg:text-4xl
                         "
                       >
-                        {section.title}
+                        {
+                          section.title
+                        }
                       </h2>
 
                       <div
                         className="
                           mt-6
-                          space-y-5
+
+                          space-y-6
                         "
                       >
                         {section.paragraphs.map(
@@ -623,15 +801,21 @@ export default function ArticleDetails() {
                               }
                               className="
                                 max-w-3xl
+
                                 text-sm
                                 leading-8
+
                                 text-zinc-600
+
                                 sm:text-base
                                 sm:leading-9
+
                                 dark:text-zinc-400
                               "
                             >
-                              {paragraph}
+                              {
+                                paragraph
+                              }
                             </p>
                           )
                         )}
@@ -649,10 +833,13 @@ export default function ArticleDetails() {
         className="
           border-t
           border-zinc-200
+
           px-4
+
           sm:px-6
           md:px-8
           lg:px-10
+
           dark:border-white/10
         "
       >
@@ -661,7 +848,9 @@ export default function ArticleDetails() {
           className="
             mx-auto
             max-w-[1400px]
+
             py-16
+
             sm:py-20
             lg:py-24
           "
@@ -670,8 +859,10 @@ export default function ArticleDetails() {
             className="
               text-[10px]
               font-semibold
+
               uppercase
               tracking-[0.2em]
+
               text-zinc-400
             "
           >
@@ -682,14 +873,20 @@ export default function ArticleDetails() {
             to={`/articles/${nextArticle.slug}`}
             className="
               group
+
               mt-5
+
               grid
               gap-8
+
               border-t
               border-zinc-200
+
               pt-8
+
               sm:grid-cols-[1fr_auto]
               sm:items-end
+
               dark:border-white/10
             "
           >
@@ -697,8 +894,11 @@ export default function ArticleDetails() {
               <span
                 className="
                   font-mono
+
                   text-[10px]
+
                   text-blue-600
+
                   dark:text-blue-400
                 "
               >
@@ -709,12 +909,19 @@ export default function ArticleDetails() {
                 className="
                   mt-4
                   max-w-[900px]
+
                   text-[clamp(2rem,5vw,4.8rem)]
+
                   font-medium
+
                   leading-[1]
+
                   tracking-[-0.055em]
+
                   transition-colors
+
                   group-hover:text-blue-600
+
                   dark:group-hover:text-blue-400
                 "
               >
@@ -729,15 +936,21 @@ export default function ArticleDetails() {
                 w-12
                 items-center
                 justify-center
+
                 border
                 border-zinc-200
+
                 text-zinc-500
+
                 transition-all
+
                 group-hover:border-blue-600
                 group-hover:bg-blue-600
                 group-hover:text-white
+
                 dark:border-white/10
                 dark:text-zinc-400
+
                 dark:group-hover:border-blue-400
                 dark:group-hover:bg-blue-400
                 dark:group-hover:text-zinc-950
@@ -746,6 +959,7 @@ export default function ArticleDetails() {
               <FiArrowRight
                 className="
                   transition-transform
+
                   group-hover:translate-x-1
                 "
               />

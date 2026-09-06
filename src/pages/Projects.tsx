@@ -9,10 +9,9 @@ import {
   FiCode,
   FiDatabase,
   FiGlobe,
-  FiGrid,
   FiLayers,
-  FiLock,
-  FiShield,
+  FiServer,
+  FiTool,
 } from "react-icons/fi";
 
 import {
@@ -27,73 +26,16 @@ import {
   portfolioData,
 } from "../data/portfolioData";
 
-interface ProjectItem {
-  title: string;
-  category: string;
-  description: string;
-  technologies: string[];
-}
-
-interface PrivateWorkItem {
-  number: string;
-  title: string;
-  description: string;
-}
-
-const HEEGAN_URL =
-  "https://heegantechnology.com/";
-
-const publicProjects =
-  portfolioData.projects as ProjectItem[];
-
-const privateWork: PrivateWorkItem[] = [
-  {
-    number: "01",
-    title:
-      "Ministry & Public-Sector Websites",
-    description:
-      "Web platforms and digital interfaces developed for public-sector and ministry-related projects. Client names, screenshots and project details are not presented publicly.",
-  },
-
-  {
-    number: "02",
-    title:
-      "Admin Systems & Dashboards",
-    description:
-      "Administrative interfaces and dashboards built for managing business operations, application data and internal workflows.",
-  },
-
-  {
-    number: "03",
-    title:
-      "Business Websites & Platforms",
-    description:
-      "Professional websites and application interfaces created for businesses across different industries.",
-  },
-
-  {
-    number: "04",
-    title:
-      "Pharmacy Systems",
-    description:
-      "Digital interfaces and systems developed for pharmacy-related business operations and management.",
-  },
-
-  {
-    number: "05",
-    title:
-      "Hospital & Healthcare Systems",
-    description:
-      "Web interfaces and software-related work for hospital and healthcare environments, with client information kept private.",
-  },
-
-  {
-    number: "06",
-    title:
-      "Custom Web Applications",
-    description:
-      "Additional client-specific websites, dashboards and web applications built according to different organizational requirements.",
-  },
+const ease = [
+  0.22,
+  1,
+  0.36,
+  1,
+] as [
+  number,
+  number,
+  number,
+  number,
 ];
 
 const reveal = {
@@ -114,29 +56,55 @@ const reveal = {
 
   transition: {
     duration: 0.65,
-
-    ease: [
-      0.22,
-      1,
-      0.36,
-      1,
-    ] as [
-      number,
-      number,
-      number,
-      number,
-    ],
+    ease,
   },
 };
+
+const workAreas = [
+  {
+    icon: FiCode,
+    title:
+      "Frontend Development",
+    description:
+      "Production interfaces built and maintained with React JSX, TypeScript, Next.js and Vue.js.",
+  },
+
+  {
+    icon: FiServer,
+    title:
+      "Backend & APIs",
+    description:
+      "Node.js, Express.js, REST APIs, backend debugging, CRUD workflows and integration testing.",
+  },
+
+  {
+    icon: FiDatabase,
+    title:
+      "Database Workflows",
+    description:
+      "Full-stack application data using MongoDB, Mongoose and PostgreSQL.",
+  },
+
+  {
+    icon: FiTool,
+    title:
+      "Odoo Maintenance",
+    description:
+      "Odoo maintenance, updates, workflow support, troubleshooting and release verification.",
+  },
+];
 
 export default function Projects() {
   const [
     activeProject,
     setActiveProject,
-  ] = useState<number>(0);
+  ] = useState(0);
+
+  const projects =
+    portfolioData.projects;
 
   const selectedProject =
-    publicProjects[
+    projects[
       activeProject
     ];
 
@@ -158,18 +126,18 @@ export default function Projects() {
           relative
 
           px-4
-          pb-16
-          pt-[95px]
+          pb-20
+          pt-[105px]
 
           sm:px-6
-          sm:pb-20
-          sm:pt-[110px]
+          sm:pb-24
+          sm:pt-[120px]
 
           md:px-8
 
           lg:px-10
-          lg:pb-28
-          lg:pt-[125px]
+          lg:pb-32
+          lg:pt-[140px]
         "
       >
         <div
@@ -211,18 +179,14 @@ export default function Projects() {
             max-w-[1400px]
           "
         >
-          
-
           <div
             className="
-              mt-8
-
               grid
-              gap-10
+              gap-12
 
               lg:grid-cols-[1.15fr_0.85fr]
               lg:items-end
-              lg:gap-16
+              lg:gap-20
             "
           >
             <div>
@@ -239,26 +203,20 @@ export default function Projects() {
                     y: 0,
                   }}
                   transition={{
-                    duration: 0.85,
-
-                    ease: [
-                      0.22,
-                      1,
-                      0.36,
-                      1,
-                    ],
+                    duration: 0.9,
+                    ease,
                   }}
                   className="
-                    text-[clamp(3.3rem,9vw,7.8rem)]
+                    text-[clamp(3.4rem,9vw,8rem)]
 
                     font-medium
 
-                    leading-[0.89]
+                    leading-[0.88]
 
-                    tracking-[-0.065em]
+                    tracking-[-0.07em]
                   "
                 >
-                  Building real
+                  Production
                 </motion.h1>
               </div>
 
@@ -275,31 +233,25 @@ export default function Projects() {
                     y: 0,
                   }}
                   transition={{
-                    duration: 0.85,
+                    duration: 0.9,
                     delay: 0.08,
-
-                    ease: [
-                      0.22,
-                      1,
-                      0.36,
-                      1,
-                    ],
+                    ease,
                   }}
                   className="
-                    text-[clamp(3.3rem,9vw,7.8rem)]
+                    text-[clamp(3.4rem,9vw,8rem)]
 
                     font-medium
 
-                    leading-[0.89]
+                    leading-[0.88]
 
-                    tracking-[-0.065em]
+                    tracking-[-0.07em]
 
                     text-zinc-400
 
                     dark:text-zinc-600
                   "
                 >
-                  digital products.
+                  work & delivery.
                 </motion.h1>
               </div>
             </div>
@@ -307,15 +259,16 @@ export default function Projects() {
             <motion.div
               initial={{
                 opacity: 0,
-                y: 20,
+                y: 24,
               }}
               animate={{
                 opacity: 1,
                 y: 0,
               }}
               transition={{
-                delay: 0.28,
-                duration: 0.65,
+                delay: 0.3,
+                duration: 0.7,
+                ease,
               }}
             >
               <p
@@ -335,44 +288,46 @@ export default function Projects() {
                   dark:text-zinc-400
                 "
               >
-                My portfolio includes
-                public personal
-                projects alongside
-                more than 32 production
-                and client projects
-                involving websites,
-                dashboards, business
-                platforms and
-                software interfaces.
+                I have contributed to
+                more than 32 websites
+                and business
+                applications across
+                corporate,
+                public-sector,
+                healthcare and service
+                organizations.
               </p>
 
               <div
                 className="
-                  mt-7
+                  mt-8
 
                   flex
+                  flex-wrap
                   items-center
 
-                  gap-3
+                  gap-x-5
+                  gap-y-3
 
                   border-t
                   border-zinc-200
 
-                  pt-5
+                  pt-6
 
                   dark:border-white/10
                 "
               >
-                <FiCode
-                  size={15}
+                <span
                   className="
-                    shrink-0
+                    text-xs
 
-                    text-blue-600
+                    text-zinc-500
 
-                    dark:text-blue-400
+                    dark:text-zinc-400
                   "
-                />
+                >
+                  React
+                </span>
 
                 <span
                   className="
@@ -383,8 +338,43 @@ export default function Projects() {
                     dark:text-zinc-400
                   "
                 >
-                  Web · Dashboards ·
-                  Full-Stack · Production
+                  Next.js
+                </span>
+
+                <span
+                  className="
+                    text-xs
+
+                    text-zinc-500
+
+                    dark:text-zinc-400
+                  "
+                >
+                  Vue.js
+                </span>
+
+                <span
+                  className="
+                    text-xs
+
+                    text-zinc-500
+
+                    dark:text-zinc-400
+                  "
+                >
+                  Node.js
+                </span>
+
+                <span
+                  className="
+                    text-xs
+
+                    text-zinc-500
+
+                    dark:text-zinc-400
+                  "
+                >
+                  Odoo
                 </span>
               </div>
             </motion.div>
@@ -393,7 +383,7 @@ export default function Projects() {
           <motion.div
             initial={{
               opacity: 0,
-              y: 18,
+              y: 20,
             }}
             animate={{
               opacity: 1,
@@ -404,7 +394,7 @@ export default function Projects() {
               duration: 0.6,
             }}
             className="
-              mt-14
+              mt-16
 
               grid
 
@@ -413,7 +403,7 @@ export default function Projects() {
 
               sm:grid-cols-3
 
-              lg:mt-20
+              lg:mt-24
 
               dark:border-white/10
             "
@@ -423,11 +413,10 @@ export default function Projects() {
                 border-b
                 border-zinc-200
 
-                py-5
+                py-6
 
                 sm:border-b-0
                 sm:border-r
-                sm:py-6
 
                 dark:border-white/10
               "
@@ -442,7 +431,62 @@ export default function Projects() {
                   text-zinc-400
                 "
               >
-                Production Work
+                Experience
+              </p>
+
+              <p
+                className="
+                  mt-2
+
+                  text-3xl
+                  font-medium
+
+                  tracking-[-0.05em]
+                "
+              >
+                2+
+              </p>
+
+              <p
+                className="
+                  mt-2
+
+                  text-xs
+
+                  text-zinc-500
+
+                  dark:text-zinc-400
+                "
+              >
+                Years
+              </p>
+            </div>
+
+            <div
+              className="
+                border-b
+                border-zinc-200
+
+                py-6
+
+                sm:border-b-0
+                sm:border-r
+                sm:px-7
+
+                dark:border-white/10
+              "
+            >
+              <p
+                className="
+                  text-[9px]
+
+                  uppercase
+                  tracking-[0.18em]
+
+                  text-zinc-400
+                "
+              >
+                Delivery
               </p>
 
               <p
@@ -469,24 +513,15 @@ export default function Projects() {
                   dark:text-zinc-400
                 "
               >
-                Client & production
-                projects
+                Websites & applications
               </p>
             </div>
 
             <div
               className="
-                border-b
-                border-zinc-200
+                py-6
 
-                py-5
-
-                sm:border-b-0
-                sm:border-r
-                sm:px-7
-                sm:py-6
-
-                dark:border-white/10
+                sm:pl-7
               "
             >
               <p
@@ -499,7 +534,7 @@ export default function Projects() {
                   text-zinc-400
                 "
               >
-                Company
+                Current
               </p>
 
               <p
@@ -526,519 +561,11 @@ export default function Projects() {
                   dark:text-zinc-400
                 "
               >
-                Professional development
-                experience
-              </p>
-            </div>
-
-            <div
-              className="
-                py-5
-
-                sm:py-6
-                sm:pl-7
-              "
-            >
-              <p
-                className="
-                  text-[9px]
-
-                  uppercase
-                  tracking-[0.18em]
-
-                  text-zinc-400
-                "
-              >
-                Public Work
-              </p>
-
-              <p
-                className="
-                  mt-2
-
-                  text-3xl
-                  font-medium
-
-                  tracking-[-0.05em]
-                "
-              >
-                Selected
-              </p>
-
-              <p
-                className="
-                  mt-2
-
-                  text-xs
-
-                  text-zinc-500
-
-                  dark:text-zinc-400
-                "
-              >
-                Projects I can showcase
+                Technology
               </p>
             </div>
           </motion.div>
         </div>
-      </section>
-
-      <section
-        className="
-          border-t
-          border-zinc-200
-
-          px-4
-
-          sm:px-6
-          md:px-8
-          lg:px-10
-
-          dark:border-white/10
-        "
-      >
-        <motion.div
-          {...reveal}
-          className="
-            mx-auto
-
-            grid
-            max-w-[1400px]
-
-            gap-10
-
-            py-16
-
-            sm:py-20
-
-            lg:grid-cols-[0.34fr_1.66fr]
-            lg:gap-14
-            lg:py-28
-          "
-        >
-          <div>
-            <p
-              className="
-                text-[10px]
-                font-semibold
-
-                uppercase
-                tracking-[0.2em]
-
-                text-zinc-400
-              "
-            >
-              Featured Work
-            </p>
-
-            <h2
-              className="
-                mt-4
-
-                text-4xl
-                font-medium
-
-                tracking-[-0.055em]
-
-                sm:text-5xl
-              "
-            >
-              Heegan
-              <span
-                className="
-                  block
-
-                  text-zinc-400
-
-                  dark:text-zinc-600
-                "
-              >
-                Technology.
-              </span>
-            </h2>
-          </div>
-
-          <div
-            className="
-              relative
-
-              overflow-hidden
-
-              border-t
-              border-zinc-200
-
-              dark:border-white/10
-            "
-          >
-            <span
-              className="
-                pointer-events-none
-
-                absolute
-
-                -bottom-12
-                right-0
-
-                select-none
-
-                font-mono
-
-                text-[8rem]
-
-                leading-none
-
-                tracking-[-0.12em]
-
-                text-zinc-100
-
-                sm:text-[11rem]
-
-                lg:text-[14rem]
-
-                dark:text-white/[0.025]
-              "
-            >
-              01
-            </span>
-
-            <div
-              className="
-                relative
-                z-10
-
-                grid
-
-                lg:grid-cols-[0.7fr_1.3fr]
-              "
-            >
-              <div
-                className="
-                  border-b
-                  border-zinc-200
-
-                  py-8
-
-                  lg:border-b-0
-                  lg:border-r
-                  lg:py-12
-                  lg:pr-10
-
-                  dark:border-white/10
-                "
-              >
-                <div
-                  className="
-                    flex
-                    h-16
-                    w-16
-                    items-center
-                    justify-center
-
-                    border
-                    border-zinc-200
-
-                    dark:border-white/10
-                  "
-                >
-                  <FiGlobe
-                    size={22}
-                    className="
-                      text-blue-600
-
-                      dark:text-blue-400
-                    "
-                  />
-                </div>
-
-                <p
-                  className="
-                    mt-8
-
-                    text-[9px]
-                    font-semibold
-
-                    uppercase
-                    tracking-[0.18em]
-
-                    text-blue-600
-
-                    dark:text-blue-400
-                  "
-                >
-                  Live Website
-                </p>
-
-                <p
-                  className="
-                    mt-3
-
-                    text-xs
-
-                    text-zinc-400
-                  "
-                >
-                  Professional Work
-                </p>
-              </div>
-
-              <div
-                className="
-                  py-8
-
-                  lg:py-12
-                  lg:pl-12
-                "
-              >
-                <p
-                  className="
-                    text-[9px]
-                    font-semibold
-
-                    uppercase
-                    tracking-[0.18em]
-
-                    text-zinc-400
-                  "
-                >
-                  Heegan Technology Website
-                </p>
-
-                <h3
-                  className="
-                    mt-4
-                    max-w-4xl
-
-                    text-3xl
-                    font-medium
-
-                    tracking-[-0.05em]
-
-                    sm:text-4xl
-
-                    lg:text-5xl
-                  "
-                >
-                  I built the{" "}
-                  <span
-                    className="
-                      text-zinc-400
-
-                      dark:text-zinc-600
-                    "
-                  >
-                    Heegan Technology
-                    website.
-                  </span>
-                </h3>
-
-                <p
-                  className="
-                    mt-7
-                    max-w-3xl
-
-                    text-sm
-                    leading-7
-
-                    text-zinc-500
-
-                    sm:text-base
-                    sm:leading-8
-
-                    dark:text-zinc-400
-                  "
-                >
-                  As part of my work as
-                  a Frontend Developer
-                  at Heegan Technology,
-                  I built the company's
-                  public website and
-                  worked on modern
-                  responsive web
-                  interfaces.
-                </p>
-
-                <div
-                  className="
-                    mt-9
-
-                    grid
-
-                    border-t
-                    border-zinc-200
-
-                    sm:grid-cols-2
-
-                    dark:border-white/10
-                  "
-                >
-                  <div
-                    className="
-                      border-b
-                      border-zinc-200
-
-                      py-5
-
-                      sm:border-r
-                      sm:pr-6
-
-                      dark:border-white/10
-                    "
-                  >
-                    <p
-                      className="
-                        text-[9px]
-
-                        uppercase
-                        tracking-[0.17em]
-
-                        text-zinc-400
-                      "
-                    >
-                      Role
-                    </p>
-
-                    <p
-                      className="
-                        mt-2
-
-                        text-sm
-                        font-medium
-                      "
-                    >
-                      Frontend Developer
-                    </p>
-                  </div>
-
-                  <div
-                    className="
-                      border-b
-                      border-zinc-200
-
-                      py-5
-
-                      sm:pl-6
-
-                      dark:border-white/10
-                    "
-                  >
-                    <p
-                      className="
-                        text-[9px]
-
-                        uppercase
-                        tracking-[0.17em]
-
-                        text-zinc-400
-                      "
-                    >
-                      Organization
-                    </p>
-
-                    <p
-                      className="
-                        mt-2
-
-                        text-sm
-                        font-medium
-                      "
-                    >
-                      Heegan Technology
-                    </p>
-                  </div>
-                </div>
-
-                <div
-                  className="
-                    mt-8
-
-                    flex
-                    flex-wrap
-
-                    gap-x-5
-                    gap-y-3
-                  "
-                >
-                  {[
-                    "React.js",
-                    "JavaScript",
-                    "Responsive UI",
-                    "Web Development",
-                  ].map(
-                    (
-                      technology
-                    ) => (
-                      <span
-                        key={
-                          technology
-                        }
-                        className="
-                          text-sm
-                          font-medium
-
-                          text-zinc-700
-
-                          dark:text-zinc-300
-                        "
-                      >
-                        {technology}
-                      </span>
-                    )
-                  )}
-                </div>
-
-                <div
-                  className="
-                    mt-9
-
-                    border-t
-                    border-zinc-200
-
-                    pt-7
-
-                    dark:border-white/10
-                  "
-                >
-                  <a
-                    href={
-                      HEEGAN_URL
-                    }
-                    target="_blank"
-                    rel="noreferrer"
-                    className="
-                      group
-
-                      inline-flex
-                      items-center
-
-                      gap-3
-
-                      border-b
-                      border-zinc-950
-
-                      pb-2
-
-                      text-sm
-                      font-medium
-
-                      dark:border-white
-                    "
-                  >
-                    Visit Heegan Technology
-
-                    <FiArrowUpRight
-                      className="
-                        transition-transform
-
-                        group-hover:-translate-y-0.5
-                        group-hover:translate-x-0.5
-                      "
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </section>
 
       <section
@@ -1063,7 +590,6 @@ export default function Projects() {
             py-16
 
             sm:py-20
-
             lg:py-28
           "
         >
@@ -1073,12 +599,12 @@ export default function Projects() {
               grid
               gap-10
 
-              lg:grid-cols-[0.34fr_1.66fr]
-              lg:gap-14
+              lg:grid-cols-[0.32fr_1.68fr]
+              lg:gap-16
             "
           >
             <div>
-              <FiLock
+              <FiBriefcase
                 size={20}
                 className="
                   text-blue-600
@@ -1115,7 +641,7 @@ export default function Projects() {
                   sm:text-5xl
                 "
               >
-                32+
+                Selected{" "}
                 <span
                   className="
                     block
@@ -1128,105 +654,9 @@ export default function Projects() {
                   projects.
                 </span>
               </h2>
-
-              <p
-                className="
-                  mt-6
-                  max-w-[290px]
-
-                  text-sm
-                  leading-7
-
-                  text-zinc-500
-
-                  dark:text-zinc-400
-                "
-              >
-                A large part of my
-                professional work
-                cannot be publicly
-                presented with client
-                names, screenshots or
-                internal details.
-              </p>
             </div>
 
             <div>
-              <div
-                className="
-                  border-y
-                  border-zinc-200
-
-                  py-6
-
-                  dark:border-white/10
-                "
-              >
-                <div
-                  className="
-                    flex
-                    items-start
-
-                    gap-4
-                  "
-                >
-                  <FiShield
-                    size={18}
-                    className="
-                      mt-1
-                      shrink-0
-
-                      text-blue-600
-
-                      dark:text-blue-400
-                    "
-                  />
-
-                  <div>
-                    <p
-                      className="
-                        text-[9px]
-                        font-semibold
-
-                        uppercase
-                        tracking-[0.18em]
-
-                        text-zinc-400
-                      "
-                    >
-                      Confidentiality
-                    </p>
-
-                    <p
-                      className="
-                        mt-3
-                        max-w-3xl
-
-                        text-sm
-                        leading-7
-
-                        text-zinc-500
-
-                        sm:text-base
-
-                        dark:text-zinc-400
-                      "
-                    >
-                      I respect the
-                      privacy of the
-                      organizations and
-                      clients I work
-                      with. Therefore,
-                      confidential
-                      projects are
-                      represented here
-                      only by general
-                      project categories.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
               <div
                 className="
                   grid
@@ -1234,168 +664,433 @@ export default function Projects() {
                   border-t
                   border-zinc-200
 
-                  sm:grid-cols-2
+                  lg:grid-cols-[0.72fr_1.28fr]
 
                   dark:border-white/10
                 "
               >
-                {privateWork.map(
-                  (
-                    item,
-                    index
-                  ) => (
-                    <motion.article
-                      key={
-                        item.number
-                      }
-                      initial={{
-                        opacity: 0,
-                        y: 22,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        duration: 0.5,
+                <div
+                  className="
+                    lg:border-r
+                    lg:border-zinc-200
 
-                        delay:
-                          index *
-                          0.04,
-                      }}
-                      className={`
-                        group
-                        relative
+                    dark:lg:border-white/10
+                  "
+                >
+                  {projects.map(
+                    (
+                      project,
+                      index
+                    ) => {
+                      const active =
+                        activeProject ===
+                        index;
 
-                        min-h-[260px]
+                      return (
+                        <button
+                          key={
+                            project.id
+                          }
+                          type="button"
+                          onMouseEnter={() =>
+                            setActiveProject(
+                              index
+                            )
+                          }
+                          onFocus={() =>
+                            setActiveProject(
+                              index
+                            )
+                          }
+                          onClick={() =>
+                            setActiveProject(
+                              index
+                            )
+                          }
+                          className={`
+                            group
+                            relative
 
-                        overflow-hidden
+                            block
+                            w-full
 
-                        border-b
-                        border-zinc-200
+                            border-b
+                            border-zinc-200
 
-                        py-8
+                            px-4
+                            py-6
 
-                        dark:border-white/10
+                            text-left
 
-                        ${
-                          index %
-                            2 ===
-                          0
-                            ? `
-                              sm:border-r
-                              sm:pr-8
-                            `
-                            : `
-                              sm:pl-8
-                            `
-                        }
-                      `}
+                            transition-colors
+
+                            sm:px-6
+
+                            dark:border-white/10
+
+                            ${
+                              active
+                                ? `
+                                  bg-zinc-50
+
+                                  dark:bg-white/[0.025]
+                                `
+                                : ""
+                            }
+                          `}
+                        >
+                          {active && (
+                            <motion.span
+                              layoutId="project-active"
+                              className="
+                                absolute
+                                bottom-0
+                                left-0
+                                top-0
+
+                                w-[2px]
+
+                                bg-blue-600
+
+                                dark:bg-blue-400
+                              "
+                            />
+                          )}
+
+                          <div
+                            className="
+                              grid
+
+                              grid-cols-[42px_1fr]
+
+                              gap-3
+                            "
+                          >
+                            <span
+                              className="
+                                font-mono
+
+                                text-[10px]
+
+                                text-zinc-400
+                              "
+                            >
+                              {(
+                                index + 1
+                              )
+                                .toString()
+                                .padStart(
+                                  2,
+                                  "0"
+                                )}
+                            </span>
+
+                            <div>
+                              <p
+                                className="
+                                  text-[9px]
+                                  font-semibold
+
+                                  uppercase
+                                  tracking-[0.16em]
+
+                                  text-zinc-400
+                                "
+                              >
+                                {
+                                  project.category
+                                }
+                              </p>
+
+                              <h3
+                                className={`
+                                  mt-2
+
+                                  text-lg
+                                  font-medium
+
+                                  tracking-[-0.035em]
+
+                                  transition-colors
+
+                                  sm:text-xl
+
+                                  ${
+                                    active
+                                      ? `
+                                        text-zinc-950
+
+                                        dark:text-white
+                                      `
+                                      : `
+                                        text-zinc-600
+
+                                        dark:text-zinc-400
+                                      `
+                                  }
+                                `}
+                              >
+                                {
+                                  project.title
+                                }
+                              </h3>
+                            </div>
+                          </div>
+                        </button>
+                      );
+                    }
+                  )}
+                </div>
+
+                {selectedProject && (
+                  <motion.div
+                    key={
+                      selectedProject.id
+                    }
+                    initial={{
+                      opacity: 0,
+                      y: 18,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    transition={{
+                      duration: 0.35,
+                    }}
+                    className="
+                      relative
+
+                      min-h-[560px]
+
+                      overflow-hidden
+
+                      px-4
+                      py-10
+
+                      sm:px-7
+
+                      lg:p-12
+                    "
+                  >
+                    <span
+                      className="
+                        pointer-events-none
+
+                        absolute
+
+                        -right-3
+                        -top-8
+
+                        font-mono
+
+                        text-[9rem]
+
+                        leading-none
+
+                        text-zinc-100
+
+                        dark:text-white/[0.025]
+                      "
                     >
-                      <span
+                      {(
+                        activeProject +
+                        1
+                      )
+                        .toString()
+                        .padStart(
+                          2,
+                          "0"
+                        )}
+                    </span>
+
+                    <div
+                      className="
+                        relative
+                        z-10
+                      "
+                    >
+                      <div
                         className="
-                          pointer-events-none
+                          flex
+                          h-14
+                          w-14
+                          items-center
+                          justify-center
 
-                          absolute
+                          border
+                          border-zinc-200
 
-                          -bottom-6
-                          right-3
-
-                          font-mono
-
-                          text-[5rem]
-
-                          leading-none
-
-                          text-zinc-100
-
-                          dark:text-white/[0.025]
+                          dark:border-white/10
                         "
                       >
-                        {item.number}
-                      </span>
+                        <FiGlobe
+                          size={20}
+                          className="
+                            text-blue-600
+
+                            dark:text-blue-400
+                          "
+                        />
+                      </div>
+
+                      <p
+                        className="
+                          mt-8
+
+                          text-[9px]
+                          font-semibold
+
+                          uppercase
+                          tracking-[0.18em]
+
+                          text-blue-600
+
+                          dark:text-blue-400
+                        "
+                      >
+                        {
+                          selectedProject.category
+                        }
+                      </p>
+
+                      <h3
+                        className="
+                          mt-4
+                          max-w-3xl
+
+                          text-3xl
+                          font-medium
+
+                          leading-[1]
+
+                          tracking-[-0.055em]
+
+                          sm:text-4xl
+                          lg:text-5xl
+                        "
+                      >
+                        {
+                          selectedProject.title
+                        }
+                      </h3>
+
+                      <p
+                        className="
+                          mt-7
+                          max-w-2xl
+
+                          text-sm
+                          leading-7
+
+                          text-zinc-500
+
+                          sm:text-base
+                          sm:leading-8
+
+                          dark:text-zinc-400
+                        "
+                      >
+                        {
+                          selectedProject.description
+                        }
+                      </p>
 
                       <div
                         className="
-                          relative
-                          z-10
+                          mt-10
+
+                          border-t
+                          border-zinc-200
+
+                          dark:border-white/10
                         "
                       >
                         <div
                           className="
-                            flex
-                            items-center
-                            justify-between
+                            py-5
                           "
                         >
-                          <span
+                          <p
                             className="
-                              font-mono
+                              text-[9px]
 
-                              text-[10px]
+                              uppercase
+                              tracking-[0.18em]
 
-                              text-blue-600
-
-                              dark:text-blue-400
+                              text-zinc-400
                             "
                           >
-                            {item.number}
-                          </span>
+                            Contribution
+                          </p>
 
-                          <FiLock
-                            size={13}
+                          <p
                             className="
-                              text-zinc-300
+                              mt-3
+                              max-w-2xl
 
-                              dark:text-zinc-700
+                              text-sm
+                              leading-7
+
+                              text-zinc-600
+
+                              dark:text-zinc-300
                             "
-                          />
+                          >
+                            {
+                              selectedProject.contribution
+                            }
+                          </p>
                         </div>
-
-                        <h3
-                          className="
-                            mt-10
-
-                            max-w-sm
-
-                            text-xl
-                            font-medium
-
-                            tracking-[-0.04em]
-
-                            transition-colors
-
-                            group-hover:text-blue-600
-
-                            dark:group-hover:text-blue-400
-                          "
-                        >
-                          {item.title}
-                        </h3>
-
-                        <p
-                          className="
-                            mt-4
-                            max-w-md
-
-                            text-sm
-                            leading-7
-
-                            text-zinc-500
-
-                            dark:text-zinc-400
-                          "
-                        >
-                          {
-                            item.description
-                          }
-                        </p>
                       </div>
-                    </motion.article>
-                  )
+
+                      {selectedProject.liveUrl && (
+                        <div
+                          className="
+                            mt-8
+                          "
+                        >
+                          <a
+                            href={
+                              selectedProject.liveUrl
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="
+                              group
+
+                              inline-flex
+                              items-center
+
+                              gap-3
+
+                              border-b
+                              border-zinc-950
+
+                              pb-2
+
+                              text-sm
+                              font-medium
+
+                              dark:border-white
+                            "
+                          >
+                            Visit live website
+
+                            <FiArrowUpRight
+                              size={15}
+                              className="
+                                transition-transform
+
+                                group-hover:-translate-y-0.5
+                                group-hover:translate-x-0.5
+                              "
+                            />
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
                 )}
               </div>
             </div>
@@ -1417,7 +1112,8 @@ export default function Projects() {
           dark:border-white/10
         "
       >
-        <div
+        <motion.div
+          {...reveal}
           className="
             mx-auto
             max-w-[1400px]
@@ -1425,26 +1121,32 @@ export default function Projects() {
             py-16
 
             sm:py-20
-
             lg:py-28
           "
         >
-          <motion.div
-            {...reveal}
+          <div
             className="
-              flex
-              flex-col
+              grid
+              gap-10
 
-              gap-5
-
-              lg:flex-row
-              lg:items-end
-              lg:justify-between
+              lg:grid-cols-[0.32fr_1.68fr]
+              lg:gap-16
             "
           >
             <div>
+              <FiLayers
+                size={20}
+                className="
+                  text-blue-600
+
+                  dark:text-blue-400
+                "
+              />
+
               <p
                 className="
+                  mt-5
+
                   text-[10px]
                   font-semibold
 
@@ -1454,13 +1156,12 @@ export default function Projects() {
                   text-zinc-400
                 "
               >
-                Public Portfolio
+                Engineering
               </p>
 
               <h2
                 className="
                   mt-4
-                  max-w-3xl
 
                   text-4xl
                   font-medium
@@ -1468,764 +1169,25 @@ export default function Projects() {
                   tracking-[-0.055em]
 
                   sm:text-5xl
-
-                  lg:text-6xl
                 "
               >
-                Projects I can{" "}
+                What I{" "}
                 <span
                   className="
+                    block
+
                     text-zinc-400
 
                     dark:text-zinc-600
                   "
                 >
-                  show publicly.
+                  work on.
                 </span>
               </h2>
             </div>
 
-            <p
-              className="
-                max-w-sm
-
-                text-sm
-                leading-7
-
-                text-zinc-500
-
-                dark:text-zinc-400
-              "
-            >
-              Hover on desktop or tap
-              a project to explore
-              its overview and
-              technology stack.
-            </p>
-          </motion.div>
-
-          <div
-            className="
-              mt-12
-
-              grid
-
-              border-t
-              border-zinc-200
-
-              lg:mt-14
-              lg:grid-cols-[0.8fr_1.2fr]
-
-              dark:border-white/10
-            "
-          >
             <div
               className="
-                lg:border-r
-                lg:border-zinc-200
-
-                dark:lg:border-white/10
-              "
-            >
-              {publicProjects.map(
-                (
-                  project,
-                  index
-                ) => {
-                  const isActive =
-                    activeProject ===
-                    index;
-
-                  const number = (
-                    index + 1
-                  )
-                    .toString()
-                    .padStart(
-                      2,
-                      "0"
-                    );
-
-                  return (
-                    <motion.button
-                      key={
-                        project.title
-                      }
-                      type="button"
-                      onMouseEnter={() =>
-                        setActiveProject(
-                          index
-                        )
-                      }
-                      onFocus={() =>
-                        setActiveProject(
-                          index
-                        )
-                      }
-                      onClick={() =>
-                        setActiveProject(
-                          index
-                        )
-                      }
-                      whileHover={{
-                        x: 3,
-                      }}
-                      className={`
-                        group
-                        relative
-
-                        block
-                        w-full
-
-                        overflow-hidden
-
-                        border-b
-                        border-zinc-200
-
-                        py-6
-
-                        text-left
-
-                        transition-colors
-
-                        sm:py-7
-
-                        dark:border-white/10
-
-                        ${
-                          isActive
-                            ? `
-                              bg-zinc-50
-
-                              dark:bg-white/[0.025]
-                            `
-                            : `
-                              bg-transparent
-                            `
-                        }
-                      `}
-                    >
-                      <motion.span
-                        animate={{
-                          height:
-                            isActive
-                              ? "100%"
-                              : "0%",
-                        }}
-                        transition={{
-                          duration: 0.3,
-                        }}
-                        className="
-                          absolute
-                          left-0
-                          top-0
-
-                          w-[2px]
-
-                          bg-blue-600
-
-                          dark:bg-blue-400
-                        "
-                      />
-
-                      <div
-                        className="
-                          relative
-                          z-10
-
-                          grid
-
-                          grid-cols-[42px_1fr_24px]
-
-                          gap-3
-
-                          px-4
-
-                          sm:grid-cols-[55px_1fr_30px]
-                          sm:gap-4
-                          sm:px-7
-                        "
-                      >
-                        <span
-                          className={`
-                            font-mono
-
-                            text-xs
-
-                            ${
-                              isActive
-                                ? `
-                                  text-blue-600
-
-                                  dark:text-blue-400
-                                `
-                                : `
-                                  text-zinc-400
-                                `
-                            }
-                          `}
-                        >
-                          {number}
-                        </span>
-
-                        <div>
-                          <p
-                            className="
-                              text-[9px]
-                              font-semibold
-
-                              uppercase
-                              tracking-[0.16em]
-
-                              text-zinc-400
-                            "
-                          >
-                            {
-                              project.category
-                            }
-                          </p>
-
-                          <h3
-                            className={`
-                              mt-2
-
-                              text-lg
-                              font-medium
-
-                              tracking-[-0.035em]
-
-                              sm:text-2xl
-
-                              ${
-                                isActive
-                                  ? `
-                                    text-zinc-950
-
-                                    dark:text-white
-                                  `
-                                  : `
-                                    text-zinc-600
-
-                                    dark:text-zinc-400
-                                  `
-                              }
-                            `}
-                          >
-                            {
-                              project.title
-                            }
-                          </h3>
-
-                          <p
-                            className="
-                              mt-2
-
-                              text-xs
-
-                              text-zinc-400
-                            "
-                          >
-                            {
-                              project.technologies
-                                .slice(
-                                  0,
-                                  3
-                                )
-                                .join(
-                                  " · "
-                                )
-                            }
-                          </p>
-                        </div>
-
-                        <FiArrowRight
-                          className={`
-                            mt-5
-
-                            transition-all
-
-                            ${
-                              isActive
-                                ? `
-                                  translate-x-1
-
-                                  text-blue-600
-
-                                  dark:text-blue-400
-                                `
-                                : `
-                                  text-zinc-300
-
-                                  dark:text-zinc-700
-                                `
-                            }
-                          `}
-                        />
-                      </div>
-                    </motion.button>
-                  );
-                }
-              )}
-            </div>
-
-            {selectedProject && (
-              <motion.div
-                key={
-                  selectedProject.title
-                }
-                initial={{
-                  opacity: 0,
-                  y: 14,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                transition={{
-                  duration: 0.35,
-                }}
-                className="
-                  relative
-
-                  min-h-[520px]
-
-                  overflow-hidden
-
-                  px-4
-                  py-9
-
-                  sm:px-7
-                  sm:py-10
-
-                  lg:min-h-[600px]
-                  lg:p-12
-                "
-              >
-                <span
-                  className="
-                    pointer-events-none
-
-                    absolute
-
-                    -right-5
-                    -top-8
-
-                    font-mono
-
-                    text-[8rem]
-
-                    leading-none
-
-                    tracking-[-0.12em]
-
-                    text-zinc-100
-
-                    sm:text-[10rem]
-
-                    dark:text-white/[0.025]
-                  "
-                >
-                  {(
-                    activeProject +
-                    1
-                  )
-                    .toString()
-                    .padStart(
-                      2,
-                      "0"
-                    )}
-                </span>
-
-                <div
-                  className="
-                    relative
-                    z-10
-                  "
-                >
-                  <div
-                    className="
-                      flex
-                      flex-wrap
-                      items-center
-
-                      gap-3
-                    "
-                  >
-                    <span
-                      className="
-                        text-[9px]
-                        font-semibold
-
-                        uppercase
-                        tracking-[0.18em]
-
-                        text-blue-600
-
-                        dark:text-blue-400
-                      "
-                    >
-                      {
-                        selectedProject.category
-                      }
-                    </span>
-
-                    <span
-                      className="
-                        h-px
-                        w-6
-
-                        bg-zinc-300
-
-                        dark:bg-zinc-700
-                      "
-                    />
-
-                    <span
-                      className="
-                        font-mono
-
-                        text-[9px]
-
-                        uppercase
-                        tracking-[0.15em]
-
-                        text-zinc-400
-                      "
-                    >
-                      Public Project
-                    </span>
-                  </div>
-
-                  <h3
-                    className="
-                      mt-5
-                      max-w-3xl
-
-                      text-3xl
-                      font-medium
-
-                      tracking-[-0.055em]
-
-                      sm:text-4xl
-
-                      lg:text-5xl
-                    "
-                  >
-                    {
-                      selectedProject.title
-                    }
-                  </h3>
-
-                  <p
-                    className="
-                      mt-7
-                      max-w-3xl
-
-                      text-sm
-                      leading-7
-
-                      text-zinc-600
-
-                      sm:text-base
-                      sm:leading-8
-
-                      dark:text-zinc-400
-                    "
-                  >
-                    {
-                      selectedProject.description
-                    }
-                  </p>
-
-                  <div
-                    className="
-                      mt-10
-
-                      border-t
-                      border-zinc-200
-
-                      dark:border-white/10
-                    "
-                  >
-                    <div
-                      className="
-                        grid
-
-                        sm:grid-cols-[150px_1fr]
-                      "
-                    >
-                      <div
-                        className="
-                          border-b
-                          border-zinc-200
-
-                          py-5
-
-                          sm:border-r
-                          sm:pr-5
-
-                          dark:border-white/10
-                        "
-                      >
-                        <p
-                          className="
-                            text-[9px]
-
-                            uppercase
-                            tracking-[0.18em]
-
-                            text-zinc-400
-                          "
-                        >
-                          Category
-                        </p>
-                      </div>
-
-                      <div
-                        className="
-                          border-b
-                          border-zinc-200
-
-                          py-5
-
-                          sm:pl-6
-
-                          dark:border-white/10
-                        "
-                      >
-                        <p
-                          className="
-                            text-sm
-                            font-medium
-                          "
-                        >
-                          {
-                            selectedProject.category
-                          }
-                        </p>
-                      </div>
-
-                      <div
-                        className="
-                          border-b
-                          border-zinc-200
-
-                          py-5
-
-                          sm:border-r
-                          sm:pr-5
-
-                          dark:border-white/10
-                        "
-                      >
-                        <p
-                          className="
-                            text-[9px]
-
-                            uppercase
-                            tracking-[0.18em]
-
-                            text-zinc-400
-                          "
-                        >
-                          Technology
-                        </p>
-                      </div>
-
-                      <div
-                        className="
-                          border-b
-                          border-zinc-200
-
-                          py-5
-
-                          sm:pl-6
-
-                          dark:border-white/10
-                        "
-                      >
-                        <div
-                          className="
-                            flex
-                            flex-wrap
-
-                            gap-x-5
-                            gap-y-3
-                          "
-                        >
-                          {selectedProject.technologies.map(
-                            (
-                              technology
-                            ) => (
-                              <span
-                                key={
-                                  technology
-                                }
-                                className="
-                                  text-sm
-                                  font-medium
-
-                                  text-zinc-700
-
-                                  dark:text-zinc-300
-                                "
-                              >
-                                {
-                                  technology
-                                }
-                              </span>
-                            )
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className="
-                      mt-10
-
-                      flex
-                      items-start
-
-                      gap-4
-
-                      border-t
-                      border-zinc-200
-
-                      pt-7
-
-                      dark:border-white/10
-                    "
-                  >
-                    <FiLayers
-                      size={18}
-                      className="
-                        mt-1
-                        shrink-0
-
-                        text-blue-600
-
-                        dark:text-blue-400
-                      "
-                    />
-
-                    <p
-                      className="
-                        max-w-xl
-
-                        text-sm
-                        leading-7
-
-                        text-zinc-500
-
-                        dark:text-zinc-400
-                      "
-                    >
-                      This project is
-                      part of the work
-                      that I can present
-                      publicly in my
-                      portfolio.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="
-          border-t
-          border-zinc-200
-
-          px-4
-
-          sm:px-6
-          md:px-8
-          lg:px-10
-
-          dark:border-white/10
-        "
-      >
-        <motion.div
-          {...reveal}
-          className="
-            mx-auto
-
-            grid
-            max-w-[1400px]
-
-            gap-8
-
-            py-16
-
-            sm:py-20
-
-            lg:grid-cols-[0.34fr_1.66fr]
-            lg:gap-14
-            lg:py-28
-          "
-        >
-          <div>
-            <FiBriefcase
-              size={20}
-              className="
-                text-blue-600
-
-                dark:text-blue-400
-              "
-            />
-
-            <p
-              className="
-                mt-5
-
-                text-[10px]
-                font-semibold
-
-                uppercase
-                tracking-[0.2em]
-
-                text-zinc-400
-              "
-            >
-              Experience
-            </p>
-          </div>
-
-          <div>
-            <h2
-              className="
-                max-w-[1000px]
-
-                text-[clamp(2.4rem,7vw,5.5rem)]
-
-                font-medium
-
-                leading-[1]
-
-                tracking-[-0.055em]
-              "
-            >
-              From personal projects to{" "}
-              <span
-                className="
-                  text-zinc-400
-
-                  dark:text-zinc-600
-                "
-              >
-                real production
-                environments.
-              </span>
-            </h2>
-
-            <div
-              className="
-                mt-10
-
                 grid
 
                 border-t
@@ -2236,43 +1198,7 @@ export default function Projects() {
                 dark:border-white/10
               "
             >
-              {[
-                {
-                  number: "01",
-                  icon: FiGlobe,
-                  title:
-                    "Web Development",
-                  description:
-                    "Responsive company websites, organizational platforms and modern web interfaces.",
-                },
-
-                {
-                  number: "02",
-                  icon: FiGrid,
-                  title:
-                    "Admin Dashboards",
-                  description:
-                    "Administrative interfaces for managing application data and operational workflows.",
-                },
-
-                {
-                  number: "03",
-                  icon: FiDatabase,
-                  title:
-                    "Data-driven Systems",
-                  description:
-                    "Applications that connect interfaces with APIs, databases and backend services.",
-                },
-
-                {
-                  number: "04",
-                  icon: FiCode,
-                  title:
-                    "Full-Stack Growth",
-                  description:
-                    "Continuing from frontend development toward complete full-stack software engineering.",
-                },
-              ].map(
+              {workAreas.map(
                 (
                   item,
                   index
@@ -2281,11 +1207,30 @@ export default function Projects() {
                     item.icon;
 
                   return (
-                    <div
+                    <motion.article
                       key={
-                        item.number
+                        item.title
                       }
+                      initial={{
+                        opacity: 0,
+                        y: 20,
+                      }}
+                      whileInView={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      viewport={{
+                        once: true,
+                      }}
+                      transition={{
+                        duration: 0.5,
+                        delay:
+                          index *
+                          0.05,
+                      }}
                       className={`
+                        min-h-[260px]
+
                         border-b
                         border-zinc-200
 
@@ -2307,43 +1252,23 @@ export default function Projects() {
                         }
                       `}
                     >
-                      <div
+                      <Icon
+                        size={19}
                         className="
-                          flex
-                          items-center
-                          justify-between
+                          text-blue-600
+
+                          dark:text-blue-400
                         "
-                      >
-                        <Icon
-                          size={19}
-                          className="
-                            text-blue-600
-
-                            dark:text-blue-400
-                          "
-                        />
-
-                        <span
-                          className="
-                            font-mono
-
-                            text-[10px]
-
-                            text-zinc-400
-                          "
-                        >
-                          {item.number}
-                        </span>
-                      </div>
+                      />
 
                       <h3
                         className="
-                          mt-8
+                          mt-9
 
                           text-xl
                           font-medium
 
-                          tracking-[-0.035em]
+                          tracking-[-0.04em]
                         "
                       >
                         {item.title}
@@ -2366,7 +1291,7 @@ export default function Projects() {
                           item.description
                         }
                       </p>
-                    </div>
+                    </motion.article>
                   );
                 }
               )}
@@ -2401,46 +1326,23 @@ export default function Projects() {
             lg:py-28
           "
         >
-          <p
-            className="
-              text-[10px]
-              font-semibold
-
-              uppercase
-              tracking-[0.2em]
-
-              text-zinc-400
-            "
-          >
-            Continue
-          </p>
-
           <div
             className="
-              mt-5
-
               flex
               flex-col
 
               gap-8
 
-              border-t
-              border-zinc-200
-
-              pt-8
-
               lg:flex-row
               lg:items-end
               lg:justify-between
-
-              dark:border-white/10
             "
           >
             <h2
               className="
-                max-w-[900px]
+                max-w-[950px]
 
-                text-[clamp(2.7rem,8vw,6.5rem)]
+                text-[clamp(2.7rem,7vw,6rem)]
 
                 font-medium
 
@@ -2449,7 +1351,7 @@ export default function Projects() {
                 tracking-[-0.06em]
               "
             >
-              More than what{" "}
+              Building beyond{" "}
               <span
                 className="
                   text-zinc-400
@@ -2457,98 +1359,43 @@ export default function Projects() {
                   dark:text-zinc-600
                 "
               >
-                can be shown.
+                the interface.
               </span>
             </h2>
 
-            <div
+            <Link
+              to="/about"
               className="
-                flex
-                flex-wrap
+                group
 
-                gap-6
+                inline-flex
+                w-fit
+                items-center
+
+                gap-3
+
+                border-b
+                border-zinc-950
+
+                pb-2
+
+                text-sm
+                font-medium
+
+                dark:border-white
               "
             >
-              <a
-                href={
-                  HEEGAN_URL
-                }
-                target="_blank"
-                rel="noreferrer"
+              About my experience
+
+              <FiArrowRight
+                size={15}
                 className="
-                  group
+                  transition-transform
 
-                  inline-flex
-                  items-center
-
-                  gap-3
-
-                  border-b
-                  border-zinc-300
-
-                  pb-2
-
-                  text-sm
-                  font-medium
-
-                  text-zinc-500
-
-                  transition-colors
-
-                  hover:border-zinc-950
-                  hover:text-zinc-950
-
-                  dark:border-white/20
-                  dark:text-zinc-400
-
-                  dark:hover:border-white
-                  dark:hover:text-white
+                  group-hover:translate-x-1
                 "
-              >
-                Heegan Technology
-
-                <FiArrowUpRight
-                  className="
-                    transition-transform
-
-                    group-hover:-translate-y-0.5
-                    group-hover:translate-x-0.5
-                  "
-                />
-              </a>
-
-              <Link
-                to="/about"
-                className="
-                  group
-
-                  inline-flex
-                  items-center
-
-                  gap-3
-
-                  border-b
-                  border-zinc-950
-
-                  pb-2
-
-                  text-sm
-                  font-medium
-
-                  dark:border-white
-                "
-              >
-                About my journey
-
-                <FiArrowRight
-                  className="
-                    transition-transform
-
-                    group-hover:translate-x-1
-                  "
-                />
-              </Link>
-            </div>
+              />
+            </Link>
           </div>
         </motion.div>
       </section>

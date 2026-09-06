@@ -1,140 +1,382 @@
-export interface PortfolioProject {
-  title: string;
-  category: string;
-  description: string;
-  technologies: string[];
-}
+import type {
+  Project,
+} from "../types/project";
 
 export const portfolioData = {
   personal: {
-    name: "Yuusuf Adow Mohamoud",
-    shortName: "Yuusuf Adow",
-    role: "Full-Stack Software Developer",
-    location: "Somalia",
-    bio: `
-      Full-Stack Software Developer focused on building
-      modern, scalable and user-friendly digital products.
-    `,
+    name:
+      "Yuusuf Adow Mohamuud",
+
+    shortName:
+      "Yuusuf Adow",
+
+    role:
+      "Full Stack Engineer",
+
+    secondaryRole:
+      "Odoo Maintenance Developer",
+
+    location:
+      "Somalia",
+
+    experience:
+      "2+ years",
+
+    bio:
+      "Full Stack Engineer and Odoo Maintenance Developer with 2+ years of experience building, maintaining, deploying and improving responsive websites, dashboards, business applications and Odoo environments.",
+  },
+
+  education: {
+    degree:
+      "Bachelor of Computer Science",
+
+    university:
+      "Zamzam University",
+
+    year:
+      "2026",
   },
 
   company: {
-    name: "TechPoint",
-    role: "CEO & Co-Founder",
+    name:
+      "TechPoint",
+
+    role:
+      "CEO & Co-Founder",
+
     facebook:
       "https://www.facebook.com/TechPoint26",
   },
 
   experience: {
-    role: "Frontend Developer",
-    company: "Heegan Technology",
+    role:
+      "Frontend Developer & Odoo Maintenance Support",
+
+    company:
+      "Heegan Technology",
+
     companyUrl:
       "https://heegantechnology.com/",
+
+    duration:
+      "Current role · 2+ years experience",
+
     description:
-      "Building modern websites, dashboards and software interfaces while strengthening full-stack and backend engineering skills.",
+      "Building and maintaining production interfaces, supporting Odoo environments, deployments, release verification, REST API troubleshooting and production improvements at Heegan Technology.",
+
+    projectCount:
+      "32+",
   },
 
   skills: {
     frontend: [
-      "React.js",
+      "React JSX",
       "TypeScript",
+      "Next.js",
+      "Vue.js",
       "JavaScript",
-      "HTML",
-      "CSS",
-      "Tailwind CSS",
-      "Vite",
+      "HTML5",
+      "CSS3",
+      "Responsive UI Development",
     ],
 
     backend: [
       "Node.js",
       "Express.js",
-      "Python",
-      "FastAPI",
+      "PHP",
+      "Laravel Basics",
+      "REST API Development",
+      "REST API Integration",
     ],
 
     databases: [
       "MongoDB",
+      "Mongoose",
       "PostgreSQL",
+    ],
+
+    odoo: [
+      "Odoo Maintenance",
+      "Odoo Updates",
+      "Workflow Support",
+      "Troubleshooting",
+      "Release Verification",
+      "Production Issue Resolution",
     ],
 
     tools: [
       "Git",
       "GitHub",
-      "REST APIs",
-      "API Integration",
-      "Odoo",
+      "Postman",
+      "Browser Developer Tools",
+      "Docker Basics",
+      "Web Deployment",
+      "Production Support",
     ],
   },
 
+  certifications: [
+    {
+      title:
+        "Full Stack Development Certificate",
+
+      provider:
+        "Rise Academy",
+    },
+
+    {
+      title:
+        "Web Development Coursework",
+
+      provider:
+        "Udemy",
+    },
+
+    {
+      title:
+        "Frontend & JavaScript Learning",
+
+      provider:
+        "freeCodeCamp",
+    },
+
+    {
+      title:
+        "Additional Technical Training",
+
+      provider:
+        "Dugsiiye",
+    },
+  ],
+
   projects: [
     {
-      title: "Admin Panel",
-      category: "Dashboard",
+      id: 1,
+
+      title:
+        "Heegan Technology Website",
+
+      slug:
+        "heegan-technology-website",
+
+      category:
+        "Corporate Website",
+
       description:
-        "Administrative dashboard for managing application data and operations.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-      ],
+        "Corporate technology website presenting Heegan Technology services and digital solutions through a modern responsive frontend.",
+
+      contribution:
+        "Built and contributed to the production frontend as part of my work at Heegan Technology.",
+
+      organization:
+        "Heegan Technology",
+
+      technologies: [],
+
+      liveUrl:
+        "https://heegantechnology.com/",
+
+      featured:
+        true,
     },
 
     {
-      title: "Customer Support System",
-      category: "Full Stack",
+      id: 2,
+
+      title:
+        "Somali Surgical Society Website",
+
+      slug:
+        "somali-surgical-society",
+
+      category:
+        "Healthcare Website",
+
       description:
-        "Customer support platform for managing users, requests and communication.",
-      technologies: [
-        "React",
-        "Node.js",
-        "MongoDB",
-      ],
+        "Responsive professional organization website supporting healthcare information sharing and public visibility.",
+
+      contribution:
+        "Contributed to the delivery of the production website as part of my professional work.",
+
+      organization:
+        "Somali Surgical Society",
+
+      technologies: [],
+
+      liveUrl:
+        "https://somalisurgicalsociety.org/",
+
+      featured:
+        true,
     },
 
     {
-      title: "Dashboard UI",
-      category: "Frontend",
+      id: 3,
+
+      title:
+        "Ultimate Security Services",
+
+      slug:
+        "ultimate-security-services",
+
+      category:
+        "Service Website",
+
       description:
-        "Responsive dashboard interface focused on usability and clean data presentation.",
-      technologies: [
-        "React",
-        "Tailwind CSS",
-      ],
+        "Professional security-services website with a clean responsive interface for company information and service presentation.",
+
+      contribution:
+        "Contributed to the website delivery and production interface work.",
+
+      organization:
+        "Ultimate Security Services",
+
+      technologies: [],
+
+      liveUrl:
+        "https://usssomalia.com/",
+
+      featured:
+        true,
     },
 
     {
-      title: "E-Learning Web",
-      category: "Web Application",
+      id: 4,
+
+      title:
+        "Dreamland Limited",
+
+      slug:
+        "dreamland-limited",
+
+      category:
+        "Corporate Website",
+
       description:
-        "Online learning platform for managing and consuming educational content.",
-      technologies: [
-        "React",
-        "Node.js",
-        "MongoDB",
-      ],
+        "Corporate business website created for clear company and service presentation across desktop and mobile devices.",
+
+      contribution:
+        "Contributed to building and delivering the responsive production website.",
+
+      organization:
+        "Dreamland Limited",
+
+      technologies: [],
+
+      liveUrl:
+        "https://dreamlandltd.com/",
+
+      featured:
+        true,
     },
 
     {
-      title: "Portfolio Website",
-      category: "Portfolio",
+      id: 5,
+
+      title:
+        "Ministry of Agriculture and Irrigation - Galmudug",
+
+      slug:
+        "ministry-agriculture-irrigation-galmudug",
+
+      category:
+        "Public Sector",
+
       description:
-        "Personal developer portfolio featuring projects, articles, experience and an interactive AI assistant.",
-      technologies: [
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Motion",
-      ],
+        "Public-sector ministry website designed for structured information delivery, accessibility and responsive use.",
+
+      contribution:
+        "Contributed to the production website as part of public-sector project delivery.",
+
+      organization:
+        "Ministry of Agriculture and Irrigation - Galmudug",
+
+      technologies: [],
+
+      liveUrl:
+        "https://moagi.gm.so/",
+
+      featured:
+        true,
     },
-  ] satisfies PortfolioProject[],
+
+    {
+      id: 6,
+
+      title:
+        "Sarmaan Coffee",
+
+      slug:
+        "sarmaan-coffee",
+
+      category:
+        "Business Website",
+
+      description:
+        "Business website delivered as part of my professional website and application project experience.",
+
+      contribution:
+        "Contributed to project delivery as part of my professional development work.",
+
+      technologies: [],
+
+      featured:
+        false,
+    },
+
+    {
+      id: 7,
+
+      title:
+        "Tokyo Optical and Watch",
+
+      slug:
+        "tokyo-optical-and-watch",
+
+      category:
+        "Business Website",
+
+      description:
+        "Client-focused website delivered as part of my professional web development experience.",
+
+      contribution:
+        "Contributed to project delivery as part of my professional development work.",
+
+      technologies: [],
+
+      featured:
+        false,
+    },
+  ] satisfies Project[],
+
+  professionalWork: {
+    total:
+      "32+",
+
+    description:
+      "Built and contributed to more than 32 website and software-system projects across corporate, public-sector, healthcare and service organizations.",
+
+    areas: [
+      "Corporate websites",
+      "Public-sector websites",
+      "Healthcare websites",
+      "Service organization websites",
+      "Business applications",
+      "Dashboards",
+      "Client-focused systems",
+      "Odoo environments",
+    ],
+  },
 
   learning: [
-    "Backend Engineering",
-    "Node.js",
-    "Express.js",
-    "REST API Development",
-    "Database Design",
-    "Full-Stack Architecture",
-    "AI-powered Applications",
+    "Backend Debugging",
+    "REST API Validation",
+    "CRUD Workflows",
+    "Database Operations",
+    "Integration Testing",
+    "Laravel Fundamentals",
+    "Docker",
+    "Deployment Workflows",
   ],
 
   social: {
@@ -155,8 +397,14 @@ export const portfolioData = {
   },
 
   contact: {
+    phone:
+      "+252 614 875072",
+
     email:
-      "yuusufcadow938@gmail.com",
+      "yuusufcadow02@gmail.com",
+
+    portfolio:
+      "https://p-rotfolio-site.vercel.app",
 
     github:
       "https://github.com/yuusufcadow",

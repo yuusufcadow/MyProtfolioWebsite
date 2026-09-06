@@ -1,12 +1,25 @@
 export interface Project {
   id: number;
+
   title: string;
+
   slug: string;
+
   category: string;
+
   description: string;
-  image: string;
+
+  contribution: string;
+
+  organization?: string;
+
   technologies: string[];
-  githubUrl?: string;
+
   liveUrl?: string;
+
+  githubUrl?: string;
+
+  image?: string;
+
   featured: boolean;
 }

@@ -1,54 +1,67 @@
-export interface ArticleSection {
-  title: string;
-  paragraphs: string[];
-}
-
-export interface Article {
-  id: string;
-  slug: string;
-  title: string;
-  excerpt: string;
-  status: "Draft" | "Planned";
-  date: string;
-  readTime: string;
-  sections: ArticleSection[];
-}
+import type {
+  Article,
+} from "../types/article";
 
 export const articles: Article[] = [
   {
     id: "01",
+
     slug:
-      "frontend-to-full-stack-development",
+      "lessons-from-32-production-projects",
+
     title:
-      "My Journey From Frontend to Full-Stack Development",
+      "Lessons From Contributing to 32+ Production Projects",
+
+    subtitle:
+      "What real delivery taught me about building, maintaining and improving production software.",
+
     excerpt:
-      "Documenting my progression from frontend development into backend engineering, APIs, databases and complete full-stack software development.",
-    status: "Draft",
-    date: "2026",
-    readTime: "5 min read",
+      "Lessons from working across corporate, public-sector, healthcare and service projects while supporting real production environments.",
+
+    category:
+      "Engineering",
+
+    tags: [
+      "Production",
+      "Web Development",
+      "Deployment",
+      "Maintenance",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "5 min read",
+
     sections: [
       {
         title:
-          "Starting with frontend development",
+          "Production work is different from practice projects",
+
         paragraphs: [
-          "My software development journey became strongly focused on frontend development, where I worked with modern web technologies and learned how to build responsive interfaces, dashboards and reusable application components.",
-          "React.js, JavaScript, TypeScript, Tailwind CSS and Vite became an important part of the way I build modern web interfaces.",
+          "Working on production projects changed the way I think about software development. A real project is not finished when the interface looks correct. It also needs to behave reliably for users, work across different devices and continue operating after deployment.",
+          "Through my work at Heegan Technology, I have contributed to more than 32 website and application projects across corporate, public-sector, healthcare and service organizations.",
         ],
       },
+
       {
         title:
-          "Moving beyond the interface",
+          "Maintenance is part of development",
+
         paragraphs: [
-          "As I became more comfortable with frontend development, I wanted to understand what happens behind the interface.",
-          "That pushed me toward backend engineering, REST APIs, databases and the architecture that connects different parts of a complete application.",
+          "Many projects continue to require attention after the first release. Features change, users report issues, integrations need verification and production behavior needs to be checked.",
+          "This experience taught me to treat maintenance, troubleshooting and production improvements as an important part of software engineering rather than something separate from development.",
         ],
       },
+
       {
         title:
-          "Growing into full-stack development",
+          "Reliable delivery requires verification",
+
         paragraphs: [
-          "I am continuing to strengthen my backend skills with Node.js, Express.js, Python and FastAPI while also working with MongoDB and PostgreSQL.",
-          "My goal is to combine my frontend experience with strong backend knowledge so I can build complete, scalable and useful software products.",
+          "Before and after releases, I check forms, navigation, dashboards, user flows and integrations to make sure changes behave correctly.",
+          "When an issue appears, I reproduce it, identify whether the problem comes from the interface, backend, API or data layer, and then verify the fix before considering the task complete.",
         ],
       },
     ],
@@ -56,38 +69,63 @@ export const articles: Article[] = [
 
   {
     id: "02",
+
     slug:
-      "learning-nodejs-backend-engineering",
+      "odoo-maintenance-real-business-environments",
+
     title:
-      "Learning Node.js Backend Engineering",
+      "Odoo Maintenance in Real Business Environments",
+
+    subtitle:
+      "What I have learned from supporting Odoo updates, workflows and production issues.",
+
     excerpt:
-      "Notes from my current backend journey with Node.js, Express.js, REST APIs and server-side application development.",
-    status: "Draft",
-    date: "2026",
-    readTime: "6 min read",
+      "A practical look at maintaining Odoo environments, supporting operational workflows and verifying system stability after changes.",
+
+    category:
+      "Odoo",
+
+    tags: [
+      "Odoo",
+      "Maintenance",
+      "Troubleshooting",
+      "Business Systems",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "4 min read",
+
     sections: [
       {
         title:
-          "Why I am learning backend engineering",
+          "Odoo support goes beyond development",
+
         paragraphs: [
-          "After working primarily with frontend development, I wanted to understand applications from end to end.",
-          "Backend engineering gives me the ability to understand servers, application logic, APIs, databases and how data moves through a complete software system.",
+          "My work with Odoo includes maintaining environments, applying operational updates, helping with workflows and troubleshooting user or platform issues.",
+          "A business system must remain stable while people continue using it for daily operations, so changes need to be handled carefully.",
         ],
       },
+
       {
         title:
-          "Working with Node.js",
+          "Understanding the workflow",
+
         paragraphs: [
-          "Node.js is an important part of my backend learning journey because it allows me to continue using JavaScript while moving from browser-based development into server-side development.",
-          "I am strengthening my understanding of HTTP, routing, server structure and backend application organization.",
+          "When supporting an Odoo issue, understanding the business workflow is often as important as understanding the technical problem.",
+          "A change can affect users, forms, processes or connected functionality, so I check how the workflow behaves before and after an update.",
         ],
       },
+
       {
         title:
-          "Building with Express.js",
+          "Verify after every important change",
+
         paragraphs: [
-          "Express.js helps me structure backend applications and REST APIs in a practical way.",
-          "I am focusing on understanding routes, controllers, application structure and how frontend applications communicate with backend services.",
+          "After updates or fixes, I verify that the affected functionality remains stable.",
+          "This includes checking user flows and confirming that the change solved the original problem without creating another issue in the environment.",
         ],
       },
     ],
@@ -95,38 +133,64 @@ export const articles: Article[] = [
 
   {
     id: "03",
+
     slug:
-      "building-clean-react-dashboard-interfaces",
+      "building-production-interfaces-react-next-vue",
+
     title:
-      "Building Clean React Dashboard Interfaces",
+      "Building Production Interfaces With React, Next.js and Vue.js",
+
+    subtitle:
+      "How I approach responsive and maintainable frontend work across different JavaScript frameworks.",
+
     excerpt:
-      "Exploring how I structure responsive dashboards, reusable React components and clean interfaces for modern applications.",
-    status: "Planned",
-    date: "2026",
-    readTime: "5 min read",
+      "My approach to responsive production interfaces using React JSX, TypeScript, Next.js and Vue.js.",
+
+    category:
+      "Frontend",
+
+    tags: [
+      "React",
+      "Next.js",
+      "Vue.js",
+      "TypeScript",
+      "Responsive UI",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "5 min read",
+
     sections: [
       {
         title:
-          "Dashboard structure",
+          "The framework changes, the fundamentals remain",
+
         paragraphs: [
-          "Dashboards need to present a large amount of information without making the interface difficult to understand.",
-          "I focus on creating clear visual hierarchy, consistent spacing and reusable interface structures.",
+          "I work with React JSX, TypeScript, Next.js and Vue.js when building and maintaining production interfaces.",
+          "Although each framework has a different structure, the same core ideas continue to matter: reusable components, clear organization, responsive layouts and predictable behavior.",
         ],
       },
+
       {
         title:
-          "Reusable React components",
+          "Reusable UI patterns",
+
         paragraphs: [
-          "Reusable components help keep dashboard interfaces consistent and easier to maintain.",
-          "I use React components to separate repeated interface patterns and organize larger applications into smaller pieces.",
+          "Reusable UI patterns make production applications easier to maintain because repeated behavior can be handled consistently.",
+          "I focus on organizing interfaces so future updates can be made without unnecessarily duplicating code or changing unrelated areas.",
         ],
       },
+
       {
         title:
-          "Responsive interfaces",
+          "Responsive behavior is part of delivery",
+
         paragraphs: [
-          "A dashboard should remain usable across desktop, tablet and mobile screens.",
-          "Responsive layout decisions are therefore an important part of how I approach modern frontend development.",
+          "A production interface needs to remain useful across different screen sizes.",
+          "I test layouts, navigation, forms and important user flows across screen sizes rather than treating mobile responsiveness as a final visual adjustment.",
         ],
       },
     ],
@@ -134,30 +198,63 @@ export const articles: Article[] = [
 
   {
     id: "04",
+
     slug:
-      "understanding-rest-api-integration",
+      "troubleshooting-rest-api-integrations",
+
     title:
-      "Understanding REST API Integration",
+      "How I Troubleshoot REST API Integrations",
+
+    subtitle:
+      "Using Postman, browser developer tools and structured debugging to isolate integration problems.",
+
     excerpt:
-      "A practical look at connecting frontend applications with backend services and working with real application data.",
-    status: "Planned",
-    date: "2026",
-    readTime: "5 min read",
+      "A practical debugging process for identifying frontend, backend, API and data-related problems in full-stack applications.",
+
+    category:
+      "API",
+
+    tags: [
+      "REST API",
+      "Postman",
+      "Debugging",
+      "Integration",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "5 min read",
+
     sections: [
       {
         title:
-          "Connecting frontend and backend",
+          "Start with the request",
+
         paragraphs: [
-          "API integration allows an interface to communicate with backend services and work with real application data.",
-          "Instead of keeping information only inside the frontend, applications can request, create, update and manage information through an API.",
+          "When an integration fails, I first check what request the frontend is actually sending.",
+          "Browser developer tools help inspect the request URL, HTTP method, payload, headers, response status and returned data.",
         ],
       },
+
       {
         title:
-          "Understanding REST APIs",
+          "Test the endpoint independently",
+
         paragraphs: [
-          "REST APIs provide a structured way for different parts of an application to communicate.",
-          "Learning how requests, responses, endpoints and HTTP methods work has become an important part of my full-stack journey.",
+          "Postman helps me separate frontend behavior from backend API behavior.",
+          "If the same request fails in Postman, the issue is more likely related to the API, request data or backend. If it works in Postman but fails in the browser, I can focus more closely on the frontend integration.",
+        ],
+      },
+
+      {
+        title:
+          "Follow the data",
+
+        paragraphs: [
+          "Many integration problems become easier to understand when the data is checked step by step.",
+          "I inspect the frontend payload, API response and database-related behavior to identify where the expected data stops matching the actual application behavior.",
         ],
       },
     ],
@@ -165,36 +262,63 @@ export const articles: Article[] = [
 
   {
     id: "05",
+
     slug:
-      "mongodb-postgresql-backend-journey",
+      "release-checks-production-deployments",
+
     title:
-      "MongoDB and PostgreSQL in My Backend Journey",
+      "Release Checks Before and After Production Deployment",
+
+    subtitle:
+      "A practical checklist mindset for safer software delivery.",
+
     excerpt:
-      "Learning notes about MongoDB and PostgreSQL while strengthening my database knowledge for full-stack applications.",
-    status: "Planned",
-    date: "2026",
-    readTime: "5 min read",
+      "How functional checks, production validation and post-deployment troubleshooting support more reliable releases.",
+
+    category:
+      "Deployment",
+
+    tags: [
+      "Deployment",
+      "Release",
+      "Testing",
+      "Production",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "4 min read",
+
     sections: [
       {
         title:
-          "Why databases matter",
+          "A successful build is not enough",
+
         paragraphs: [
-          "Most real applications need a reliable way to store and retrieve information.",
-          "Learning databases helps me understand how application data should be organized and connected to backend services.",
+          "A successful build or deployment command does not automatically mean the application is working correctly for users.",
+          "After changes are delivered, I validate production behavior and check the functionality that could have been affected.",
         ],
       },
+
       {
         title:
-          "MongoDB",
+          "Functional checks",
+
         paragraphs: [
-          "MongoDB is part of my full-stack development stack and gives me experience working with document-oriented application data.",
+          "My release checks can include forms, dashboards, navigation, user flows and integrations.",
+          "The goal is to confirm that important functionality behaves as expected before the release is considered stable.",
         ],
       },
+
       {
         title:
-          "PostgreSQL",
+          "Post-deployment issues",
+
         paragraphs: [
-          "PostgreSQL is helping me strengthen my understanding of relational databases and structured data.",
+          "When a problem appears after deployment, I reproduce the issue clearly and work with the development process to identify what changed.",
+          "After the fix is applied, I verify the affected flow again so the issue is not simply assumed to be resolved.",
         ],
       },
     ],
@@ -202,30 +326,64 @@ export const articles: Article[] = [
 
   {
     id: "06",
+
     slug:
-      "visual-thinking-software-development",
+      "frontend-to-full-stack-mongodb-express-react",
+
     title:
-      "Why Visual Thinking Matters in Software Development",
+      "Moving From Frontend Work Into Full-Stack Development",
+
+    subtitle:
+      "Connecting React interfaces to Node.js, Express, MongoDB and real database operations.",
+
     excerpt:
-      "How my visual design background influences the way I think about interfaces, structure and digital experiences.",
-    status: "Planned",
-    date: "2026",
-    readTime: "4 min read",
+      "How my frontend experience is expanding into backend development, CRUD workflows, REST APIs and database-driven applications.",
+
+    category:
+      "Full Stack",
+
+    tags: [
+      "React",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "Mongoose",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "5 min read",
+
     sections: [
       {
         title:
-          "Development and visual thinking",
+          "Frontend gave me the starting point",
+
         paragraphs: [
-          "Alongside software development, I work as a Visual Graphic Designer.",
-          "That visual background influences how I think about clarity, structure and the way people experience digital interfaces.",
+          "My professional work has given me strong experience building and maintaining frontend interfaces.",
+          "Moving into full-stack development means understanding what happens after the interface sends data and before the user receives a response.",
         ],
       },
+
       {
         title:
-          "Building clearer digital experiences",
+          "Working with Node.js and Express",
+
         paragraphs: [
-          "Good software is not only about functionality. The way information is organized and presented also affects how easy a product is to use.",
-          "I try to bring both engineering and visual thinking into the digital products I build.",
+          "I build full-stack applications using Node.js and Express.js to create backend routes, handle application logic and connect frontend interfaces with REST APIs.",
+          "This work also gives me practical experience with debugging, request validation and CRUD operations.",
+        ],
+      },
+
+      {
+        title:
+          "Connecting MongoDB and Mongoose",
+
+        paragraphs: [
+          "MongoDB and Mongoose allow me to connect application logic with persistent data.",
+          "Working across the frontend, API and database layers helps me understand the complete path that application data follows.",
         ],
       },
     ],
@@ -233,22 +391,62 @@ export const articles: Article[] = [
 
   {
     id: "07",
+
     slug:
-      "future-direction-information-security",
+      "mongodb-mongoose-postgresql-database-workflows",
+
     title:
-      "My Future Direction in Information Security",
+      "MongoDB, Mongoose and PostgreSQL in My Development Work",
+
+    subtitle:
+      "Learning to think about application data beyond the user interface.",
+
     excerpt:
-      "Documenting my future goal of developing deeper engineering knowledge and professional certification in Information Security.",
-    status: "Planned",
-    date: "Future",
-    readTime: "4 min read",
+      "Notes from working with MongoDB, Mongoose and PostgreSQL as part of full-stack and database workflows.",
+
+    category:
+      "Database",
+
+    tags: [
+      "MongoDB",
+      "Mongoose",
+      "PostgreSQL",
+      "Database",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "4 min read",
+
     sections: [
       {
         title:
-          "A future engineering direction",
+          "Data is part of the application design",
+
         paragraphs: [
-          "Information Security is one of the areas I want to explore more deeply as my software engineering journey continues.",
-          "My future goal is to pursue deeper professional knowledge and certification in Information Security.",
+          "Moving deeper into full-stack development has made database structure an important part of how I think about applications.",
+          "The frontend may display the information, but the backend and database determine how that information is stored, retrieved and updated.",
+        ],
+      },
+
+      {
+        title:
+          "MongoDB and Mongoose",
+
+        paragraphs: [
+          "I use MongoDB and Mongoose in full-stack projects to model application data and connect Node.js and Express applications to database operations.",
+        ],
+      },
+
+      {
+        title:
+          "PostgreSQL",
+
+        paragraphs: [
+          "PostgreSQL is also part of my database skill set and gives me experience with relational database workflows.",
+          "Working with both database approaches helps me strengthen the data layer of my full-stack development skills.",
         ],
       },
     ],
@@ -256,22 +454,64 @@ export const articles: Article[] = [
 
   {
     id: "08",
+
     slug:
-      "exploring-data-science-artificial-intelligence",
+      "git-github-postman-docker-production-workflow",
+
     title:
-      "Exploring Data Science and Artificial Intelligence",
+      "The Tools Behind My Development and Delivery Workflow",
+
+    subtitle:
+      "Git, GitHub, Postman, browser tools and Docker basics in practical software work.",
+
     excerpt:
-      "Documenting my future direction toward Data Science and Artificial Intelligence alongside software engineering.",
-    status: "Planned",
-    date: "Future",
-    readTime: "4 min read",
+      "How development tools support collaboration, debugging, controlled delivery and production troubleshooting.",
+
+    category:
+      "Workflow",
+
+    tags: [
+      "Git",
+      "GitHub",
+      "Postman",
+      "Docker",
+      "DevTools",
+    ],
+
+    status:
+      "draft",
+
+    readTime:
+      "4 min read",
+
     sections: [
       {
         title:
-          "Looking beyond software development",
+          "Git and GitHub",
+
         paragraphs: [
-          "Data Science and Artificial Intelligence are part of my future technology goals.",
-          "I want to continue developing my software engineering foundation while eventually pursuing deeper knowledge and professional certification in Data Science with AI.",
+          "I use Git and GitHub for version control, collaboration and controlled delivery of code changes.",
+          "A clear version history is especially useful when working on production systems where changes need to be reviewed and tracked.",
+        ],
+      },
+
+      {
+        title:
+          "Postman and browser developer tools",
+
+        paragraphs: [
+          "Postman and browser developer tools are important parts of my debugging workflow.",
+          "They help me inspect requests, responses, frontend behavior and integration problems without guessing where an issue comes from.",
+        ],
+      },
+
+      {
+        title:
+          "Docker basics and deployment",
+
+        paragraphs: [
+          "I am also building practical familiarity with Docker basics alongside web deployment and production support.",
+          "These tools help me continue expanding from application development toward a broader understanding of software delivery.",
         ],
       },
     ],

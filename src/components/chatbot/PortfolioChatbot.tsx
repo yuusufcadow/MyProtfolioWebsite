@@ -13,7 +13,6 @@ import {
 import {
   FiArrowUp,
   FiMessageCircle,
-  FiMinus,
   FiRefreshCw,
   FiX,
 } from "react-icons/fi";
@@ -31,117 +30,173 @@ import type {
 } from "../../types/chatbot";
 
 const initialMessage: ChatMessage = {
-  id: "welcome",
-  role: "assistant",
+  id:
+    "welcome",
+
+  role:
+    "assistant",
+
   content:
-    "Hi 👋 I'm Yuusuf's portfolio assistant. Ask me about his skills, projects, experience, learning journey or how to contact him.",
+    "Hi, I'm Yuusuf's portfolio assistant. Ask me about his Full Stack Engineering experience, Odoo maintenance, Heegan Technology, 32+ production projects, technical skills, articles or contact information.",
 };
 
-function createMessageId(): string {
+function createMessageId() {
   return `${Date.now()}-${Math.random()}`;
 }
 
 export default function PortfolioChatbot() {
-  const [isOpen, setIsOpen] =
-    useState<boolean>(false);
+  const [
+    isOpen,
+    setIsOpen,
+  ] = useState(false);
 
-  const [input, setInput] =
-    useState<string>("");
+  const [
+    input,
+    setInput,
+  ] = useState("");
 
-  const [messages, setMessages] =
-    useState<ChatMessage[]>([
-      initialMessage,
-    ]);
+  const [
+    messages,
+    setMessages,
+  ] =
+    useState<ChatMessage[]>(
+      [
+        initialMessage,
+      ]
+    );
 
-  const [isTyping, setIsTyping] =
-    useState<boolean>(false);
+  const [
+    isTyping,
+    setIsTyping,
+  ] = useState(false);
 
   const messagesEndRef =
     useRef<HTMLDivElement | null>(
       null
     );
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }, [messages, isTyping]);
+  useEffect(
+    () => {
+      messagesEndRef.current?.scrollIntoView(
+        {
+          behavior:
+            "smooth",
+        }
+      );
+    },
+    [
+      messages,
+      isTyping,
+    ]
+  );
 
   const sendMessage = (
     value: string
-  ): void => {
+  ) => {
     const trimmed =
       value.trim();
 
-    if (!trimmed || isTyping) {
+    if (
+      !trimmed ||
+      isTyping
+    ) {
       return;
     }
 
-    const userMessage: ChatMessage = {
-      id: createMessageId(),
-      role: "user",
-      content: trimmed,
-    };
+    const userMessage: ChatMessage =
+      {
+        id:
+          createMessageId(),
 
-    setMessages((current) => [
-      ...current,
-      userMessage,
-    ]);
+        role:
+          "user",
+
+        content:
+          trimmed,
+      };
+
+    setMessages(
+      (
+        current
+      ) => [
+        ...current,
+        userMessage,
+      ]
+    );
 
     setInput("");
     setIsTyping(true);
 
-    window.setTimeout(() => {
-      const response =
-        getChatbotResponse(
-          trimmed
+    window.setTimeout(
+      () => {
+        const response =
+          getChatbotResponse(
+            trimmed
+          );
+
+        const assistantMessage: ChatMessage =
+          {
+            id:
+              createMessageId(),
+
+            role:
+              "assistant",
+
+            content:
+              response,
+          };
+
+        setMessages(
+          (
+            current
+          ) => [
+            ...current,
+            assistantMessage,
+          ]
         );
 
-      const assistantMessage: ChatMessage =
-        {
-          id: createMessageId(),
-          role: "assistant",
-          content: response,
-        };
-
-      setMessages((current) => [
-        ...current,
-        assistantMessage,
-      ]);
-
-      setIsTyping(false);
-    }, 550);
+        setIsTyping(
+          false
+        );
+      },
+      450
+    );
   };
 
   const handleSubmit = (
     event: FormEvent<HTMLFormElement>
-  ): void => {
+  ) => {
     event.preventDefault();
 
-    sendMessage(input);
+    sendMessage(
+      input
+    );
   };
 
-  const resetChat = (): void => {
-    setMessages([
-      initialMessage,
-    ]);
+  const resetChat =
+    () => {
+      setMessages([
+        initialMessage,
+      ]);
 
-    setInput("");
-    setIsTyping(false);
-  };
+      setInput("");
+
+      setIsTyping(
+        false
+      );
+    };
 
   return (
     <>
-      {/* Floating button */}
-
       <AnimatePresence>
         {!isOpen && (
           <motion.button
             type="button"
+            aria-label="Open portfolio assistant"
             initial={{
               opacity: 0,
-              scale: 0.8,
-              y: 20,
+              scale: 0.9,
+              y: 15,
             }}
             animate={{
               opacity: 1,
@@ -150,100 +205,91 @@ export default function PortfolioChatbot() {
             }}
             exit={{
               opacity: 0,
-              scale: 0.8,
+              scale: 0.9,
             }}
             whileHover={{
-              scale: 1.05,
+              y: -2,
             }}
             whileTap={{
-              scale: 0.94,
+              scale: 0.96,
             }}
             onClick={() =>
-              setIsOpen(true)
+              setIsOpen(
+                true
+              )
             }
             className="
               fixed
-              bottom-5
-              right-5
+              bottom-[72px]
+              right-4
               z-[90]
 
               flex
+              h-12
               items-center
+              justify-center
+
               gap-3
 
-              rounded-full
-
               border
-              border-zinc-200
+              border-zinc-950
 
               bg-zinc-950
 
               px-4
-              py-3
 
               text-sm
               font-medium
-              text-white
 
-              shadow-xl
+              text-white
 
               sm:bottom-7
               sm:right-7
 
-              dark:border-white/10
+              dark:border-white
               dark:bg-white
-              dark:text-black
+              dark:text-zinc-950
+
+              xl:bottom-7
             "
           >
+            <FiMessageCircle
+              size={17}
+            />
+
             <span
               className="
-                flex
-                h-8
-                w-8
-                items-center
-                justify-center
-
-                rounded-full
-
-                bg-white/10
-
-                dark:bg-black/10
+                hidden
+                sm:block
               "
             >
-              <FiMessageCircle
-                size={17}
-              />
-            </span>
-
-            <span className="hidden sm:block">
               Ask Yuusuf AI
             </span>
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Chat window */}
-
       <AnimatePresence>
         {isOpen && (
           <motion.div
             initial={{
               opacity: 0,
-              scale: 0.95,
-              y: 25,
+              y: 24,
+              scale: 0.98,
             }}
             animate={{
               opacity: 1,
-              scale: 1,
               y: 0,
+              scale: 1,
             }}
             exit={{
               opacity: 0,
-              scale: 0.95,
-              y: 25,
+              y: 24,
+              scale: 0.98,
             }}
             transition={{
-              duration: 0.25,
+              duration: 0.3,
+
               ease: [
                 0.22,
                 1,
@@ -254,47 +300,43 @@ export default function PortfolioChatbot() {
             className="
               fixed
               inset-x-3
-              bottom-3
+              bottom-[62px]
               z-[100]
 
               flex
-              h-[min(680px,calc(100vh-24px))]
+              h-[min(680px,calc(100vh-82px))]
               flex-col
 
               overflow-hidden
-
-              rounded-[26px]
 
               border
               border-zinc-200
 
               bg-white
 
-              shadow-2xl
-
               sm:inset-x-auto
               sm:bottom-7
               sm:right-7
               sm:h-[650px]
-              sm:w-[390px]
+              sm:w-[400px]
 
               dark:border-white/10
-              dark:bg-[#111113]
+              dark:bg-[#0d0d0f]
             "
           >
-            {/* Header */}
-
             <div
               className="
                 flex
+                min-h-[68px]
                 items-center
                 justify-between
 
                 border-b
                 border-zinc-200
 
-                px-5
-                py-4
+                px-4
+
+                sm:px-5
 
                 dark:border-white/10
               "
@@ -316,16 +358,13 @@ export default function PortfolioChatbot() {
                     items-center
                     justify-center
 
-                    rounded-full
-
-                    bg-zinc-950
+                    border
+                    border-zinc-200
 
                     text-xs
-                    font-bold
-                    text-white
+                    font-semibold
 
-                    dark:bg-white
-                    dark:text-black
+                    dark:border-white/10
                   "
                 >
                   YA
@@ -333,20 +372,18 @@ export default function PortfolioChatbot() {
                   <span
                     className="
                       absolute
-                      bottom-0
-                      right-0
+                      -bottom-[1px]
+                      -right-[1px]
 
-                      h-3
-                      w-3
+                      h-2.5
+                      w-2.5
 
-                      rounded-full
-
-                      border-2
+                      border
                       border-white
 
                       bg-emerald-500
 
-                      dark:border-[#111113]
+                      dark:border-[#0d0d0f]
                     "
                   />
                 </div>
@@ -367,11 +404,14 @@ export default function PortfolioChatbot() {
 
                   <p
                     className="
-                      text-xs
+                      mt-0.5
 
-                      text-zinc-500
+                      text-[10px]
 
-                      dark:text-zinc-400
+                      uppercase
+                      tracking-[0.12em]
+
+                      text-zinc-400
                     "
                   >
                     Portfolio Assistant
@@ -383,75 +423,84 @@ export default function PortfolioChatbot() {
                 className="
                   flex
                   items-center
-                  gap-1
                 "
               >
                 <button
                   type="button"
-                  onClick={resetChat}
+                  onClick={
+                    resetChat
+                  }
                   title="Reset chat"
                   className="
                     flex
-                    h-9
-                    w-9
+                    h-10
+                    w-10
                     items-center
                     justify-center
 
-                    rounded-full
+                    border-l
+                    border-zinc-200
 
-                    text-zinc-500
+                    text-zinc-400
 
-                    transition
+                    transition-colors
 
-                    hover:bg-zinc-100
+                    hover:bg-zinc-50
                     hover:text-zinc-950
 
-                    dark:text-zinc-400
-                    dark:hover:bg-white/5
+                    dark:border-white/10
+
+                    dark:hover:bg-white/[0.04]
                     dark:hover:text-white
                   "
                 >
                   <FiRefreshCw
-                    size={16}
+                    size={15}
                   />
                 </button>
 
                 <button
                   type="button"
                   onClick={() =>
-                    setIsOpen(false)
+                    setIsOpen(
+                      false
+                    )
                   }
+                  aria-label="Close assistant"
                   className="
                     flex
-                    h-9
-                    w-9
+                    h-10
+                    w-10
                     items-center
                     justify-center
 
-                    rounded-full
+                    border-l
+                    border-zinc-200
 
-                    text-zinc-500
+                    text-zinc-400
 
-                    transition
+                    transition-colors
 
-                    hover:bg-zinc-100
+                    hover:bg-zinc-50
                     hover:text-zinc-950
 
-                    dark:text-zinc-400
-                    dark:hover:bg-white/5
+                    dark:border-white/10
+
+                    dark:hover:bg-white/[0.04]
                     dark:hover:text-white
                   "
                 >
-                  <FiX size={18} />
+                  <FiX
+                    size={17}
+                  />
                 </button>
               </div>
             </div>
 
-            {/* Messages */}
-
             <div
               className="
                 flex-1
+
                 overflow-y-auto
 
                 px-4
@@ -462,11 +511,13 @@ export default function PortfolioChatbot() {
                 className="
                   flex
                   flex-col
-                  gap-4
+                  gap-3
                 "
               >
                 {messages.map(
-                  (message) => (
+                  (
+                    message
+                  ) => (
                     <motion.div
                       key={
                         message.id
@@ -481,6 +532,7 @@ export default function PortfolioChatbot() {
                       }}
                       className={`
                         flex
+
                         ${
                           message.role ===
                           "user"
@@ -495,7 +547,7 @@ export default function PortfolioChatbot() {
 
                           whitespace-pre-line
 
-                          rounded-2xl
+                          border
 
                           px-4
                           py-3
@@ -507,25 +559,25 @@ export default function PortfolioChatbot() {
                             message.role ===
                             "user"
                               ? `
-                                rounded-br-md
+                                border-zinc-950
+
                                 bg-zinc-950
+
                                 text-white
 
+                                dark:border-white
                                 dark:bg-white
-                                dark:text-black
+                                dark:text-zinc-950
                               `
                               : `
-                                rounded-bl-md
-
-                                border
                                 border-zinc-200
 
-                                bg-zinc-100
+                                bg-zinc-50
 
                                 text-zinc-700
 
                                 dark:border-white/10
-                                dark:bg-white/5
+                                dark:bg-white/[0.035]
                                 dark:text-zinc-300
                               `
                           }
@@ -539,41 +591,51 @@ export default function PortfolioChatbot() {
                   )
                 )}
 
-                {/* Typing */}
-
                 {isTyping && (
-                  <div className="flex justify-start">
+                  <div
+                    className="
+                      flex
+                      justify-start
+                    "
+                  >
                     <div
                       className="
                         flex
                         items-center
-                        gap-1
 
-                        rounded-2xl
-                        rounded-bl-md
+                        gap-1.5
 
                         border
                         border-zinc-200
 
-                        bg-zinc-100
+                        bg-zinc-50
 
                         px-4
                         py-4
 
                         dark:border-white/10
-                        dark:bg-white/5
+                        dark:bg-white/[0.035]
                       "
                     >
-                      {[0, 1, 2].map(
-                        (item) => (
+                      {[
+                        0,
+                        1,
+                        2,
+                      ].map(
+                        (
+                          item
+                        ) => (
                           <motion.span
-                            key={item}
+                            key={
+                              item
+                            }
                             animate={{
                               opacity: [
                                 0.3,
                                 1,
                                 0.3,
                               ],
+
                               y: [
                                 0,
                                 -3,
@@ -583,8 +645,10 @@ export default function PortfolioChatbot() {
                             transition={{
                               duration:
                                 0.8,
+
                               repeat:
                                 Infinity,
+
                               delay:
                                 item *
                                 0.12,
@@ -592,8 +656,6 @@ export default function PortfolioChatbot() {
                             className="
                               h-1.5
                               w-1.5
-
-                              rounded-full
 
                               bg-zinc-500
                             "
@@ -611,28 +673,34 @@ export default function PortfolioChatbot() {
                 />
               </div>
 
-              {/* Suggestions */}
-
-              {messages.length === 1 && (
-                <div className="mt-6">
+              {messages.length ===
+                1 && (
+                <div
+                  className="
+                    mt-7
+                  "
+                >
                   <p
                     className="
                       mb-3
-                      text-xs
-                      font-medium
+
+                      text-[9px]
+                      font-semibold
+
                       uppercase
-                      tracking-[0.14em]
+                      tracking-[0.18em]
 
                       text-zinc-400
                     "
                   >
-                    Try asking
+                    Ask about
                   </p>
 
                   <div
                     className="
-                      flex
-                      flex-wrap
+                      grid
+                      grid-cols-2
+
                       gap-2
                     "
                   >
@@ -651,7 +719,7 @@ export default function PortfolioChatbot() {
                             )
                           }
                           className="
-                            rounded-full
+                            min-h-11
 
                             border
                             border-zinc-200
@@ -659,18 +727,21 @@ export default function PortfolioChatbot() {
                             px-3
                             py-2
 
+                            text-left
+
                             text-xs
                             font-medium
 
                             text-zinc-600
 
-                            transition
+                            transition-colors
 
                             hover:border-zinc-400
                             hover:text-zinc-950
 
                             dark:border-white/10
                             dark:text-zinc-400
+
                             dark:hover:border-white/20
                             dark:hover:text-white
                           "
@@ -685,8 +756,6 @@ export default function PortfolioChatbot() {
                 </div>
               )}
             </div>
-
-            {/* Input */}
 
             <div
               className="
@@ -705,9 +774,8 @@ export default function PortfolioChatbot() {
                 className="
                   flex
                   items-end
-                  gap-2
 
-                  rounded-[18px]
+                  gap-2
 
                   border
                   border-zinc-200
@@ -719,15 +787,20 @@ export default function PortfolioChatbot() {
                   focus-within:border-zinc-400
 
                   dark:border-white/10
-                  dark:bg-white/5
+                  dark:bg-white/[0.03]
+
                   dark:focus-within:border-white/20
                 "
               >
                 <textarea
-                  value={input}
+                  value={
+                    input
+                  }
                   rows={1}
                   placeholder="Ask about Yuusuf..."
-                  onChange={(event) =>
+                  onChange={(
+                    event
+                  ) =>
                     setInput(
                       event.target
                         .value
@@ -751,6 +824,7 @@ export default function PortfolioChatbot() {
                   className="
                     max-h-28
                     min-h-[42px]
+
                     flex-1
 
                     resize-none
@@ -779,7 +853,7 @@ export default function PortfolioChatbot() {
                     isTyping
                   }
                   whileTap={{
-                    scale: 0.9,
+                    scale: 0.92,
                   }}
                   className="
                     flex
@@ -789,44 +863,39 @@ export default function PortfolioChatbot() {
                     items-center
                     justify-center
 
-                    rounded-full
-
                     bg-zinc-950
 
                     text-white
-
-                    transition
 
                     disabled:cursor-not-allowed
                     disabled:opacity-30
 
                     dark:bg-white
-                    dark:text-black
+                    dark:text-zinc-950
                   "
                 >
                   <FiArrowUp
-                    size={17}
+                    size={16}
                   />
                 </motion.button>
               </form>
 
-              <div
+              <p
                 className="
                   mt-2
-                  flex
-                  items-center
-                  justify-center
-                  gap-1
 
-                  text-[10px]
+                  text-center
+
+                  text-[9px]
+
+                  uppercase
+                  tracking-[0.13em]
 
                   text-zinc-400
                 "
               >
-                <FiMinus />
-
-                Portfolio assistant
-              </div>
+                Yuusuf portfolio assistant
+              </p>
             </div>
           </motion.div>
         )}
