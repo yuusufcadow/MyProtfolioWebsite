@@ -1,15 +1,8 @@
 import {
-  useState,
-} from "react";
-
-import {
   FiArrowRight,
   FiArrowUpRight,
-  FiBriefcase,
   FiCode,
   FiDatabase,
-  FiGlobe,
-  FiLayers,
   FiServer,
   FiTool,
 } from "react-icons/fi";
@@ -26,6 +19,8 @@ import {
   portfolioData,
 } from "../data/portfolioData";
 
+import ProjectLogo from "../components/projects/ProjectLogo";
+
 const ease = [
   0.22,
   1,
@@ -38,75 +33,51 @@ const ease = [
   number,
 ];
 
-const reveal = {
-  initial: {
-    opacity: 0,
-    y: 28,
-  },
-
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-
-  viewport: {
-    once: true,
-    amount: 0.12,
-  },
-
-  transition: {
-    duration: 0.65,
-    ease,
-  },
-};
-
 const workAreas = [
   {
     icon: FiCode,
+
     title:
       "Frontend Development",
+
     description:
-      "Production interfaces built and maintained with React JSX, TypeScript, Next.js and Vue.js.",
+      "Building and maintaining responsive production interfaces with React JSX, TypeScript, Next.js and Vue.js.",
   },
 
   {
     icon: FiServer,
+
     title:
       "Backend & APIs",
+
     description:
-      "Node.js, Express.js, REST APIs, backend debugging, CRUD workflows and integration testing.",
+      "Node.js, Express.js, REST APIs, CRUD workflows, debugging and integration testing.",
   },
 
   {
     icon: FiDatabase,
+
     title:
       "Database Workflows",
+
     description:
-      "Full-stack application data using MongoDB, Mongoose and PostgreSQL.",
+      "Working with MongoDB, Mongoose and PostgreSQL in full-stack applications.",
   },
 
   {
     icon: FiTool,
+
     title:
-      "Odoo Maintenance",
+      "Odoo & Production",
+
     description:
-      "Odoo maintenance, updates, workflow support, troubleshooting and release verification.",
+      "Odoo maintenance, troubleshooting, workflow support, deployments and release verification.",
   },
 ];
 
 export default function Projects() {
-  const [
-    activeProject,
-    setActiveProject,
-  ] = useState(0);
-
   const projects =
     portfolioData.projects;
-
-  const selectedProject =
-    projects[
-      activeProject
-    ];
 
   return (
     <main
@@ -190,11 +161,7 @@ export default function Projects() {
             "
           >
             <div>
-              <div
-                className="
-                  overflow-hidden
-                "
-              >
+              <div className="overflow-hidden">
                 <motion.h1
                   initial={{
                     y: "110%",
@@ -216,15 +183,11 @@ export default function Projects() {
                     tracking-[-0.07em]
                   "
                 >
-                  Production
+                  Selected
                 </motion.h1>
               </div>
 
-              <div
-                className="
-                  overflow-hidden
-                "
-              >
+              <div className="overflow-hidden">
                 <motion.h1
                   initial={{
                     y: "110%",
@@ -251,7 +214,7 @@ export default function Projects() {
                     dark:text-zinc-600
                   "
                 >
-                  work & delivery.
+                  production work.
                 </motion.h1>
               </div>
             </div>
@@ -259,7 +222,7 @@ export default function Projects() {
             <motion.div
               initial={{
                 opacity: 0,
-                y: 24,
+                y: 22,
               }}
               animate={{
                 opacity: 1,
@@ -288,26 +251,16 @@ export default function Projects() {
                   dark:text-zinc-400
                 "
               >
-                I have contributed to
-                more than 32 websites
-                and business
-                applications across
-                corporate,
-                public-sector,
-                healthcare and service
-                organizations.
+                Selected websites from my
+                work across technology,
+                healthcare, public-sector,
+                security, corporate and
+                business organizations.
               </p>
 
               <div
                 className="
                   mt-8
-
-                  flex
-                  flex-wrap
-                  items-center
-
-                  gap-x-5
-                  gap-y-3
 
                   border-t
                   border-zinc-200
@@ -317,65 +270,20 @@ export default function Projects() {
                   dark:border-white/10
                 "
               >
-                <span
+                <p
                   className="
                     text-xs
+                    leading-6
 
                     text-zinc-500
 
                     dark:text-zinc-400
                   "
                 >
-                  React
-                </span>
-
-                <span
-                  className="
-                    text-xs
-
-                    text-zinc-500
-
-                    dark:text-zinc-400
-                  "
-                >
-                  Next.js
-                </span>
-
-                <span
-                  className="
-                    text-xs
-
-                    text-zinc-500
-
-                    dark:text-zinc-400
-                  "
-                >
-                  Vue.js
-                </span>
-
-                <span
-                  className="
-                    text-xs
-
-                    text-zinc-500
-
-                    dark:text-zinc-400
-                  "
-                >
-                  Node.js
-                </span>
-
-                <span
-                  className="
-                    text-xs
-
-                    text-zinc-500
-
-                    dark:text-zinc-400
-                  "
-                >
-                  Odoo
-                </span>
+                  Part of 32+ websites,
+                  applications, dashboards
+                  and production systems.
+                </p>
               </div>
             </motion.div>
           </div>
@@ -513,7 +421,7 @@ export default function Projects() {
                   dark:text-zinc-400
                 "
               >
-                Websites & applications
+                Production projects
               </p>
             </div>
 
@@ -594,29 +502,36 @@ export default function Projects() {
           "
         >
           <motion.div
-            {...reveal}
+            initial={{
+              opacity: 0,
+              y: 24,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.1,
+            }}
+            transition={{
+              duration: 0.65,
+              ease,
+            }}
             className="
-              grid
-              gap-10
+              flex
+              flex-col
 
-              lg:grid-cols-[0.32fr_1.68fr]
-              lg:gap-16
+              gap-7
+
+              lg:flex-row
+              lg:items-end
+              lg:justify-between
             "
           >
             <div>
-              <FiBriefcase
-                size={20}
-                className="
-                  text-blue-600
-
-                  dark:text-blue-400
-                "
-              />
-
               <p
                 className="
-                  mt-5
-
                   text-[10px]
                   font-semibold
 
@@ -626,475 +541,602 @@ export default function Projects() {
                   text-zinc-400
                 "
               >
-                Professional Work
+                Selected Projects
               </p>
 
               <h2
                 className="
                   mt-4
 
-                  text-4xl
+                  max-w-3xl
+
+                  text-[clamp(2.6rem,6vw,5.3rem)]
+
                   font-medium
 
-                  tracking-[-0.055em]
+                  leading-[1]
 
-                  sm:text-5xl
+                  tracking-[-0.06em]
                 "
               >
-                Selected{" "}
+                Work delivered for{" "}
                 <span
                   className="
-                    block
-
                     text-zinc-400
 
                     dark:text-zinc-600
                   "
                 >
-                  projects.
+                  real organizations.
                 </span>
               </h2>
             </div>
 
-            <div>
-              <div
-                className="
-                  grid
+            <p
+              className="
+                max-w-md
 
-                  border-t
-                  border-zinc-200
+                text-sm
+                leading-7
 
-                  lg:grid-cols-[0.72fr_1.28fr]
+                text-zinc-500
 
-                  dark:border-white/10
-                "
-              >
-                <div
+                dark:text-zinc-400
+              "
+            >
+              Each project below is part
+              of my professional website
+              and software delivery
+              experience.
+            </p>
+          </motion.div>
+
+          <div
+            className="
+              mt-12
+
+              grid
+              gap-5
+
+              md:grid-cols-2
+
+              xl:grid-cols-3
+              xl:gap-6
+            "
+          >
+            {projects.map(
+              (
+                project,
+                index
+              ) => (
+                <motion.article
+                  key={
+                    project.id
+                  }
+                  initial={{
+                    opacity: 0,
+                    y: 26,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  viewport={{
+                    once: true,
+                    amount: 0.1,
+                  }}
+                  transition={{
+                    duration: 0.55,
+
+                    delay:
+                      index *
+                      0.04,
+                  }}
                   className="
-                    lg:border-r
-                    lg:border-zinc-200
+                    group
+                    relative
 
-                    dark:lg:border-white/10
+                    flex
+                    min-h-[470px]
+                    flex-col
+
+                    overflow-hidden
+
+                    border
+                    border-zinc-200
+
+                    bg-white
+
+                    p-6
+
+                    transition-colors
+                    duration-300
+
+                    hover:border-zinc-300
+                    hover:bg-zinc-50
+
+                    sm:p-7
+
+                    dark:border-white/10
+                    dark:bg-[#09090b]
+
+                    dark:hover:border-white/20
+                    dark:hover:bg-white/[0.025]
                   "
                 >
-                  {projects.map(
-                    (
-                      project,
-                      index
-                    ) => {
-                      const active =
-                        activeProject ===
-                        index;
-
-                      return (
-                        <button
-                          key={
-                            project.id
-                          }
-                          type="button"
-                          onMouseEnter={() =>
-                            setActiveProject(
-                              index
-                            )
-                          }
-                          onFocus={() =>
-                            setActiveProject(
-                              index
-                            )
-                          }
-                          onClick={() =>
-                            setActiveProject(
-                              index
-                            )
-                          }
-                          className={`
-                            group
-                            relative
-
-                            block
-                            w-full
-
-                            border-b
-                            border-zinc-200
-
-                            px-4
-                            py-6
-
-                            text-left
-
-                            transition-colors
-
-                            sm:px-6
-
-                            dark:border-white/10
-
-                            ${
-                              active
-                                ? `
-                                  bg-zinc-50
-
-                                  dark:bg-white/[0.025]
-                                `
-                                : ""
-                            }
-                          `}
-                        >
-                          {active && (
-                            <motion.span
-                              layoutId="project-active"
-                              className="
-                                absolute
-                                bottom-0
-                                left-0
-                                top-0
-
-                                w-[2px]
-
-                                bg-blue-600
-
-                                dark:bg-blue-400
-                              "
-                            />
-                          )}
-
-                          <div
-                            className="
-                              grid
-
-                              grid-cols-[42px_1fr]
-
-                              gap-3
-                            "
-                          >
-                            <span
-                              className="
-                                font-mono
-
-                                text-[10px]
-
-                                text-zinc-400
-                              "
-                            >
-                              {(
-                                index + 1
-                              )
-                                .toString()
-                                .padStart(
-                                  2,
-                                  "0"
-                                )}
-                            </span>
-
-                            <div>
-                              <p
-                                className="
-                                  text-[9px]
-                                  font-semibold
-
-                                  uppercase
-                                  tracking-[0.16em]
-
-                                  text-zinc-400
-                                "
-                              >
-                                {
-                                  project.category
-                                }
-                              </p>
-
-                              <h3
-                                className={`
-                                  mt-2
-
-                                  text-lg
-                                  font-medium
-
-                                  tracking-[-0.035em]
-
-                                  transition-colors
-
-                                  sm:text-xl
-
-                                  ${
-                                    active
-                                      ? `
-                                        text-zinc-950
-
-                                        dark:text-white
-                                      `
-                                      : `
-                                        text-zinc-600
-
-                                        dark:text-zinc-400
-                                      `
-                                  }
-                                `}
-                              >
-                                {
-                                  project.title
-                                }
-                              </h3>
-                            </div>
-                          </div>
-                        </button>
-                      );
-                    }
-                  )}
-                </div>
-
-                {selectedProject && (
-                  <motion.div
-                    key={
-                      selectedProject.id
-                    }
-                    initial={{
-                      opacity: 0,
-                      y: 18,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    transition={{
-                      duration: 0.35,
-                    }}
+                  <span
                     className="
-                      relative
+                      pointer-events-none
 
-                      min-h-[560px]
+                      absolute
 
-                      overflow-hidden
+                      -bottom-9
+                      right-2
 
-                      px-4
-                      py-10
+                      font-mono
 
-                      sm:px-7
+                      text-[7rem]
 
-                      lg:p-12
+                      leading-none
+
+                      tracking-[-0.1em]
+
+                      text-zinc-100
+
+                      dark:text-white/[0.02]
                     "
                   >
+                    {(
+                      index + 1
+                    )
+                      .toString()
+                      .padStart(
+                        2,
+                        "0"
+                      )}
+                  </span>
+
+                  <div
+                    className="
+                      relative
+                      z-10
+
+                      flex
+                      items-start
+                      justify-between
+
+                      gap-5
+                    "
+                  >
+                    <ProjectLogo
+                      title={
+                        project.title
+                      }
+                      logoUrl={
+                        project.logoUrl
+                      }
+                      size="lg"
+                    />
+
                     <span
                       className="
-                        pointer-events-none
+                        text-[9px]
+                        font-medium
 
-                        absolute
+                        uppercase
+                        tracking-[0.16em]
 
-                        -right-3
-                        -top-8
-
-                        font-mono
-
-                        text-[9rem]
-
-                        leading-none
-
-                        text-zinc-100
-
-                        dark:text-white/[0.025]
+                        text-zinc-400
                       "
                     >
-                      {(
-                        activeProject +
-                        1
-                      )
-                        .toString()
-                        .padStart(
-                          2,
-                          "0"
-                        )}
+                      {project.category}
                     </span>
+                  </div>
 
-                    <div
+                  <div
+                    className="
+                      relative
+                      z-10
+
+                      mt-10
+                    "
+                  >
+                    <h3
                       className="
-                        relative
-                        z-10
+                        max-w-md
+
+                        text-2xl
+                        font-medium
+
+                        leading-[1.1]
+
+                        tracking-[-0.05em]
+
+                        transition-colors
+
+                        group-hover:text-blue-600
+
+                        sm:text-3xl
+
+                        dark:group-hover:text-blue-400
                       "
                     >
-                      <div
-                        className="
-                          flex
-                          h-14
-                          w-14
-                          items-center
-                          justify-center
+                      {project.title}
+                    </h3>
 
-                          border
-                          border-zinc-200
-
-                          dark:border-white/10
-                        "
-                      >
-                        <FiGlobe
-                          size={20}
-                          className="
-                            text-blue-600
-
-                            dark:text-blue-400
-                          "
-                        />
-                      </div>
-
+                    {project.organization && (
                       <p
                         className="
-                          mt-8
+                          mt-3
 
-                          text-[9px]
-                          font-semibold
+                          text-[10px]
 
                           uppercase
-                          tracking-[0.18em]
+                          tracking-[0.15em]
 
-                          text-blue-600
-
-                          dark:text-blue-400
+                          text-zinc-400
                         "
                       >
                         {
-                          selectedProject.category
+                          project.organization
                         }
                       </p>
+                    )}
 
-                      <h3
-                        className="
-                          mt-4
-                          max-w-3xl
+                    <p
+                      className="
+                        mt-6
 
-                          text-3xl
-                          font-medium
+                        text-sm
+                        leading-7
 
-                          leading-[1]
+                        text-zinc-500
 
-                          tracking-[-0.055em]
+                        dark:text-zinc-400
+                      "
+                    >
+                      {project.description}
+                    </p>
+                  </div>
 
-                          sm:text-4xl
-                          lg:text-5xl
-                        "
-                      >
-                        {
-                          selectedProject.title
-                        }
-                      </h3>
+                  <div
+                    className="
+                      relative
+                      z-10
 
-                      <p
-                        className="
-                          mt-7
-                          max-w-2xl
+                      mt-auto
 
-                          text-sm
-                          leading-7
+                      pt-8
+                    "
+                  >
+                    <div
+                      className="
+                        flex
+                        flex-wrap
 
-                          text-zinc-500
-
-                          sm:text-base
-                          sm:leading-8
-
-                          dark:text-zinc-400
-                        "
-                      >
-                        {
-                          selectedProject.description
-                        }
-                      </p>
-
-                      <div
-                        className="
-                          mt-10
-
-                          border-t
-                          border-zinc-200
-
-                          dark:border-white/10
-                        "
-                      >
-                        <div
-                          className="
-                            py-5
-                          "
-                        >
-                          <p
+                        gap-x-4
+                        gap-y-2
+                      "
+                    >
+                      {project.technologies.map(
+                        (
+                          technology
+                        ) => (
+                          <span
+                            key={
+                              technology
+                            }
                             className="
-                              text-[9px]
+                              text-[10px]
+                              font-medium
 
-                              uppercase
-                              tracking-[0.18em]
+                              text-zinc-500
 
-                              text-zinc-400
-                            "
-                          >
-                            Contribution
-                          </p>
-
-                          <p
-                            className="
-                              mt-3
-                              max-w-2xl
-
-                              text-sm
-                              leading-7
-
-                              text-zinc-600
-
-                              dark:text-zinc-300
+                              dark:text-zinc-400
                             "
                           >
                             {
-                              selectedProject.contribution
+                              technology
                             }
-                          </p>
-                        </div>
-                      </div>
+                          </span>
+                        )
+                      )}
+                    </div>
 
-                      {selectedProject.liveUrl && (
-                        <div
+                    <div
+                      className="
+                        mt-6
+
+                        border-t
+                        border-zinc-200
+
+                        pt-5
+
+                        dark:border-white/10
+                      "
+                    >
+                      {project.liveUrl ? (
+                        <a
+                          href={
+                            project.liveUrl
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="
-                            mt-8
+                            group/link
+
+                            flex
+                            items-center
+                            justify-between
+
+                            gap-4
+
+                            text-sm
+                            font-medium
                           "
                         >
-                          <a
-                            href={
-                              selectedProject.liveUrl
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <span>
+                            Visit website
+                          </span>
+
+                          <span
                             className="
-                              group
-
-                              inline-flex
+                              flex
+                              h-10
+                              w-10
                               items-center
+                              justify-center
 
-                              gap-3
+                              border
+                              border-zinc-200
 
-                              border-b
-                              border-zinc-950
+                              text-zinc-500
 
-                              pb-2
+                              transition-all
 
-                              text-sm
-                              font-medium
+                              group-hover/link:border-blue-600
+                              group-hover/link:bg-blue-600
+                              group-hover/link:text-white
 
-                              dark:border-white
+                              dark:border-white/10
+
+                              dark:group-hover/link:border-blue-400
+                              dark:group-hover/link:bg-blue-400
+                              dark:group-hover/link:text-zinc-950
                             "
                           >
-                            Visit live website
-
                             <FiArrowUpRight
                               size={15}
                               className="
                                 transition-transform
 
-                                group-hover:-translate-y-0.5
-                                group-hover:translate-x-0.5
+                                group-hover/link:-translate-y-0.5
+                                group-hover/link:translate-x-0.5
                               "
                             />
-                          </a>
-                        </div>
+                          </span>
+                        </a>
+                      ) : (
+                        <p
+                          className="
+                            text-xs
+
+                            text-zinc-400
+                          "
+                        >
+                          Professional project
+                        </p>
                       )}
                     </div>
-                  </motion.div>
-                )}
-              </div>
-            </div>
+                  </div>
+                </motion.article>
+              )
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="
+          border-t
+          border-zinc-200
+
+          px-4
+
+          sm:px-6
+          md:px-8
+          lg:px-10
+
+          dark:border-white/10
+        "
+      >
+        <div
+          className="
+            mx-auto
+
+            grid
+            max-w-[1400px]
+
+            gap-10
+
+            py-16
+
+            sm:py-20
+
+            lg:grid-cols-[0.32fr_1.68fr]
+            lg:gap-16
+            lg:py-28
+          "
+        >
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+              ease,
+            }}
+          >
+            <p
+              className="
+                text-[10px]
+                font-semibold
+
+                uppercase
+                tracking-[0.2em]
+
+                text-zinc-400
+              "
+            >
+              Engineering
+            </p>
+
+            <h2
+              className="
+                mt-4
+
+                text-4xl
+                font-medium
+
+                tracking-[-0.055em]
+
+                sm:text-5xl
+              "
+            >
+              Across the{" "}
+              <span
+                className="
+                  block
+
+                  text-zinc-400
+
+                  dark:text-zinc-600
+                "
+              >
+                stack.
+              </span>
+            </h2>
           </motion.div>
+
+          <div
+            className="
+              grid
+
+              border-t
+              border-zinc-200
+
+              sm:grid-cols-2
+
+              dark:border-white/10
+            "
+          >
+            {workAreas.map(
+              (
+                item,
+                index
+              ) => {
+                const Icon =
+                  item.icon;
+
+                return (
+                  <motion.article
+                    key={
+                      item.title
+                    }
+                    initial={{
+                      opacity: 0,
+                      y: 20,
+                    }}
+                    whileInView={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    viewport={{
+                      once: true,
+                    }}
+                    transition={{
+                      duration: 0.5,
+
+                      delay:
+                        index *
+                        0.05,
+                    }}
+                    className={`
+                      min-h-[260px]
+
+                      border-b
+                      border-zinc-200
+
+                      py-8
+
+                      dark:border-white/10
+
+                      ${
+                        index %
+                          2 ===
+                        0
+                          ? `
+                            sm:border-r
+                            sm:pr-8
+                          `
+                          : `
+                            sm:pl-8
+                          `
+                      }
+                    `}
+                  >
+                    <Icon
+                      size={19}
+                      className="
+                        text-blue-600
+
+                        dark:text-blue-400
+                      "
+                    />
+
+                    <h3
+                      className="
+                        mt-9
+
+                        text-xl
+                        font-medium
+
+                        tracking-[-0.04em]
+                      "
+                    >
+                      {item.title}
+                    </h3>
+
+                    <p
+                      className="
+                        mt-4
+                        max-w-md
+
+                        text-sm
+                        leading-7
+
+                        text-zinc-500
+
+                        dark:text-zinc-400
+                      "
+                    >
+                      {
+                        item.description
+                      }
+                    </p>
+                  </motion.article>
+                );
+              }
+            )}
+          </div>
         </div>
       </section>
 
@@ -1113,209 +1155,21 @@ export default function Projects() {
         "
       >
         <motion.div
-          {...reveal}
-          className="
-            mx-auto
-            max-w-[1400px]
-
-            py-16
-
-            sm:py-20
-            lg:py-28
-          "
-        >
-          <div
-            className="
-              grid
-              gap-10
-
-              lg:grid-cols-[0.32fr_1.68fr]
-              lg:gap-16
-            "
-          >
-            <div>
-              <FiLayers
-                size={20}
-                className="
-                  text-blue-600
-
-                  dark:text-blue-400
-                "
-              />
-
-              <p
-                className="
-                  mt-5
-
-                  text-[10px]
-                  font-semibold
-
-                  uppercase
-                  tracking-[0.2em]
-
-                  text-zinc-400
-                "
-              >
-                Engineering
-              </p>
-
-              <h2
-                className="
-                  mt-4
-
-                  text-4xl
-                  font-medium
-
-                  tracking-[-0.055em]
-
-                  sm:text-5xl
-                "
-              >
-                What I{" "}
-                <span
-                  className="
-                    block
-
-                    text-zinc-400
-
-                    dark:text-zinc-600
-                  "
-                >
-                  work on.
-                </span>
-              </h2>
-            </div>
-
-            <div
-              className="
-                grid
-
-                border-t
-                border-zinc-200
-
-                sm:grid-cols-2
-
-                dark:border-white/10
-              "
-            >
-              {workAreas.map(
-                (
-                  item,
-                  index
-                ) => {
-                  const Icon =
-                    item.icon;
-
-                  return (
-                    <motion.article
-                      key={
-                        item.title
-                      }
-                      initial={{
-                        opacity: 0,
-                        y: 20,
-                      }}
-                      whileInView={{
-                        opacity: 1,
-                        y: 0,
-                      }}
-                      viewport={{
-                        once: true,
-                      }}
-                      transition={{
-                        duration: 0.5,
-                        delay:
-                          index *
-                          0.05,
-                      }}
-                      className={`
-                        min-h-[260px]
-
-                        border-b
-                        border-zinc-200
-
-                        py-8
-
-                        dark:border-white/10
-
-                        ${
-                          index %
-                            2 ===
-                          0
-                            ? `
-                              sm:border-r
-                              sm:pr-8
-                            `
-                            : `
-                              sm:pl-8
-                            `
-                        }
-                      `}
-                    >
-                      <Icon
-                        size={19}
-                        className="
-                          text-blue-600
-
-                          dark:text-blue-400
-                        "
-                      />
-
-                      <h3
-                        className="
-                          mt-9
-
-                          text-xl
-                          font-medium
-
-                          tracking-[-0.04em]
-                        "
-                      >
-                        {item.title}
-                      </h3>
-
-                      <p
-                        className="
-                          mt-4
-                          max-w-md
-
-                          text-sm
-                          leading-7
-
-                          text-zinc-500
-
-                          dark:text-zinc-400
-                        "
-                      >
-                        {
-                          item.description
-                        }
-                      </p>
-                    </motion.article>
-                  );
-                }
-              )}
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      <section
-        className="
-          border-t
-          border-zinc-200
-
-          px-4
-
-          sm:px-6
-          md:px-8
-          lg:px-10
-
-          dark:border-white/10
-        "
-      >
-        <motion.div
-          {...reveal}
+          initial={{
+            opacity: 0,
+            y: 24,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.65,
+            ease,
+          }}
           className="
             mx-auto
             max-w-[1400px]
@@ -1351,7 +1205,7 @@ export default function Projects() {
                 tracking-[-0.06em]
               "
             >
-              Building beyond{" "}
+              More than what{" "}
               <span
                 className="
                   text-zinc-400
@@ -1359,7 +1213,7 @@ export default function Projects() {
                   dark:text-zinc-600
                 "
               >
-                the interface.
+                fits in a portfolio.
               </span>
             </h2>
 

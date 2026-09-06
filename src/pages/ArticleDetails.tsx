@@ -1,4 +1,9 @@
 import {
+  useEffect,
+  useState,
+} from "react";
+
+import {
   FiArrowLeft,
   FiArrowRight,
   FiBookOpen,
@@ -29,39 +34,22 @@ const ease = [
   number,
 ];
 
-const reveal = {
-  initial: {
-    opacity: 0,
-    y: 24,
-  },
-
-  whileInView: {
-    opacity: 1,
-    y: 0,
-  },
-
-  viewport: {
-    once: true,
-    amount: 0.12,
-  },
-
-  transition: {
-    duration: 0.65,
-    ease,
-  },
-};
-
 export default function ArticleDetails() {
   const {
     slug,
   } = useParams();
 
+  const [
+    progress,
+    setProgress,
+  ] = useState(0);
+
   const articleIndex =
     articles.findIndex(
       (
-        article
+        item
       ) =>
-        article.slug ===
+        item.slug ===
         slug
     );
 
@@ -71,6 +59,78 @@ export default function ArticleDetails() {
           articleIndex
         ]
       : undefined;
+
+  useEffect(
+    () => {
+      window.scrollTo({
+        top: 0,
+        behavior:
+          "auto",
+      });
+    },
+    [
+      slug,
+    ]
+  );
+
+  useEffect(
+    () => {
+      const updateProgress =
+        () => {
+          const scrollTop =
+            window.scrollY;
+
+          const scrollableHeight =
+            document.documentElement
+              .scrollHeight -
+            window.innerHeight;
+
+          if (
+            scrollableHeight <=
+            0
+          ) {
+            setProgress(
+              0
+            );
+
+            return;
+          }
+
+          const percentage =
+            Math.min(
+              Math.max(
+                (scrollTop /
+                  scrollableHeight) *
+                  100,
+                0
+              ),
+              100
+            );
+
+          setProgress(
+            percentage
+          );
+        };
+
+      updateProgress();
+
+      window.addEventListener(
+        "scroll",
+        updateProgress,
+        {
+          passive: true,
+        }
+      );
+
+      return () => {
+        window.removeEventListener(
+          "scroll",
+          updateProgress
+        );
+      };
+    },
+    []
+  );
 
   if (!article) {
     return (
@@ -138,6 +198,25 @@ export default function ArticleDetails() {
             Article not found.
           </h1>
 
+          <p
+            className="
+              mx-auto
+              mt-5
+              max-w-lg
+
+              text-sm
+              leading-7
+
+              text-zinc-500
+
+              dark:text-zinc-400
+            "
+          >
+            The article you are looking
+            for does not exist or may
+            have been moved.
+          </p>
+
           <Link
             to="/articles"
             className="
@@ -177,11 +256,24 @@ export default function ArticleDetails() {
     );
   }
 
+  const previousArticle =
+    articleIndex >
+    0
+      ? articles[
+          articleIndex - 1
+        ]
+      : articles[
+          articles.length -
+            1
+        ];
+
   const nextArticle =
-    articles[
-      articleIndex + 1
-    ] ||
-    articles[0];
+    articleIndex <
+    articles.length - 1
+      ? articles[
+          articleIndex + 1
+        ]
+      : articles[0];
 
   return (
     <main
@@ -196,6 +288,39 @@ export default function ArticleDetails() {
         dark:text-white
       "
     >
+      <div
+        className="
+          fixed
+          left-0
+          top-[68px]
+          z-40
+
+          h-[2px]
+          w-full
+
+          bg-transparent
+        "
+      >
+        <motion.div
+          className="
+            h-full
+
+            origin-left
+
+            bg-blue-600
+
+            dark:bg-blue-400
+          "
+          animate={{
+            width:
+              `${progress}%`,
+          }}
+          transition={{
+            duration: 0.1,
+          }}
+        />
+      </div>
+
       <section
         className="
           relative
@@ -257,7 +382,7 @@ export default function ArticleDetails() {
           <motion.div
             initial={{
               opacity: 0,
-              y: 12,
+              y: 10,
             }}
             animate={{
               opacity: 1,
@@ -318,15 +443,16 @@ export default function ArticleDetails() {
             <motion.aside
               initial={{
                 opacity: 0,
-                y: 20,
+                y: 18,
               }}
               animate={{
                 opacity: 1,
                 y: 0,
               }}
               transition={{
-                delay: 0.15,
+                delay: 0.12,
                 duration: 0.6,
+                ease,
               }}
             >
               <span
@@ -419,7 +545,9 @@ export default function ArticleDetails() {
                       font-medium
                     "
                   >
-                    {article.category}
+                    {
+                      article.category
+                    }
                   </p>
                 </div>
 
@@ -454,7 +582,46 @@ export default function ArticleDetails() {
                       font-medium
                     "
                   >
-                    {article.readTime}
+                    {
+                      article.readTime
+                    }
+                  </p>
+                </div>
+
+                <div
+                  className="
+                    border-b
+                    border-zinc-200
+
+                    py-4
+
+                    dark:border-white/10
+                  "
+                >
+                  <p
+                    className="
+                      text-[9px]
+
+                      uppercase
+                      tracking-[0.18em]
+
+                      text-zinc-400
+                    "
+                  >
+                    Sections
+                  </p>
+
+                  <p
+                    className="
+                      mt-2
+
+                      text-sm
+                      font-medium
+                    "
+                  >
+                    {
+                      article.sections.length
+                    }
                   </p>
                 </div>
               </div>
@@ -478,15 +645,15 @@ export default function ArticleDetails() {
                     ease,
                   }}
                   className="
-                    max-w-[1050px]
+                    max-w-[1080px]
 
                     text-[clamp(2.8rem,7vw,6.8rem)]
 
                     font-medium
 
-                    leading-[0.95]
+                    leading-[0.94]
 
-                    tracking-[-0.06em]
+                    tracking-[-0.065em]
                   "
                 >
                   {article.title}
@@ -504,7 +671,7 @@ export default function ArticleDetails() {
                     y: 0,
                   }}
                   transition={{
-                    delay: 0.22,
+                    delay: 0.2,
                     duration: 0.6,
                   }}
                   className="
@@ -516,28 +683,33 @@ export default function ArticleDetails() {
 
                     leading-8
 
+                    tracking-[-0.02em]
+
                     text-zinc-700
 
                     sm:text-xl
+                    sm:leading-9
 
                     dark:text-zinc-300
                   "
                 >
-                  {article.subtitle}
+                  {
+                    article.subtitle
+                  }
                 </motion.p>
               )}
 
               <motion.p
                 initial={{
                   opacity: 0,
-                  y: 20,
+                  y: 18,
                 }}
                 animate={{
                   opacity: 1,
                   y: 0,
                 }}
                 transition={{
-                  delay: 0.3,
+                  delay: 0.28,
                   duration: 0.65,
                 }}
                 className="
@@ -561,12 +733,15 @@ export default function ArticleDetails() {
               <motion.div
                 initial={{
                   opacity: 0,
+                  y: 10,
                 }}
                 animate={{
                   opacity: 1,
+                  y: 0,
                 }}
                 transition={{
-                  delay: 0.45,
+                  delay: 0.4,
+                  duration: 0.55,
                 }}
                 className="
                   mt-9
@@ -576,6 +751,13 @@ export default function ArticleDetails() {
 
                   gap-x-5
                   gap-y-3
+
+                  border-t
+                  border-zinc-200
+
+                  pt-6
+
+                  dark:border-white/10
                 "
               >
                 {article.tags.map(
@@ -587,12 +769,13 @@ export default function ArticleDetails() {
                         tag
                       }
                       className="
-                        text-xs
+                        text-[10px]
                         font-medium
 
-                        text-zinc-500
+                        uppercase
+                        tracking-[0.12em]
 
-                        dark:text-zinc-400
+                        text-zinc-400
                       "
                     >
                       {tag}
@@ -638,7 +821,21 @@ export default function ArticleDetails() {
           "
         >
           <motion.aside
-            {...reveal}
+            initial={{
+              opacity: 0,
+              y: 18,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.6,
+              ease,
+            }}
             className="
               lg:sticky
               lg:top-[110px]
@@ -673,7 +870,7 @@ export default function ArticleDetails() {
             <p
               className="
                 mt-4
-                max-w-[230px]
+                max-w-[235px]
 
                 text-sm
                 leading-7
@@ -684,10 +881,52 @@ export default function ArticleDetails() {
               "
             >
               Practical notes from my
-              engineering, production
-              and development
-              experience.
+              engineering, production,
+              Odoo and full-stack
+              development experience.
             </p>
+
+            <div
+              className="
+                mt-8
+
+                border-t
+                border-zinc-200
+
+                pt-5
+
+                dark:border-white/10
+              "
+            >
+              <p
+                className="
+                  text-[9px]
+
+                  uppercase
+                  tracking-[0.16em]
+
+                  text-zinc-400
+                "
+              >
+                Reading progress
+              </p>
+
+              <p
+                className="
+                  mt-2
+
+                  font-mono
+
+                  text-sm
+                  font-medium
+                "
+              >
+                {Math.round(
+                  progress
+                )}
+                %
+              </p>
+            </div>
           </motion.aside>
 
           <article
@@ -718,6 +957,7 @@ export default function ArticleDetails() {
                   }}
                   transition={{
                     duration: 0.6,
+
                     delay:
                       index *
                       0.04,
@@ -726,12 +966,12 @@ export default function ArticleDetails() {
                     border-t
                     border-zinc-200
 
-                    py-10
+                    py-11
 
                     first:border-t-0
                     first:pt-0
 
-                    sm:py-12
+                    sm:py-14
 
                     dark:border-white/10
                   "
@@ -741,8 +981,8 @@ export default function ArticleDetails() {
                       grid
                       gap-5
 
-                      sm:grid-cols-[60px_1fr]
-                      sm:gap-8
+                      sm:grid-cols-[64px_1fr]
+                      sm:gap-9
                     "
                   >
                     <span
@@ -769,10 +1009,14 @@ export default function ArticleDetails() {
                     <div>
                       <h2
                         className="
+                          max-w-2xl
+
                           text-2xl
                           font-medium
 
-                          tracking-[-0.045em]
+                          leading-[1.08]
+
+                          tracking-[-0.05em]
 
                           sm:text-3xl
 
@@ -786,23 +1030,24 @@ export default function ArticleDetails() {
 
                       <div
                         className="
-                          mt-6
+                          mt-7
 
                           space-y-6
                         "
                       >
                         {section.paragraphs.map(
                           (
-                            paragraph
+                            paragraph,
+                            paragraphIndex
                           ) => (
                             <p
                               key={
-                                paragraph
+                                paragraphIndex
                               }
                               className="
                                 max-w-3xl
 
-                                text-sm
+                                text-[15px]
                                 leading-8
 
                                 text-zinc-600
@@ -825,6 +1070,60 @@ export default function ArticleDetails() {
                 </motion.section>
               )
             )}
+
+            <div
+              className="
+                mt-8
+
+                border-y
+                border-zinc-200
+
+                py-8
+
+                dark:border-white/10
+              "
+            >
+              <p
+                className="
+                  text-[9px]
+                  font-semibold
+
+                  uppercase
+                  tracking-[0.18em]
+
+                  text-zinc-400
+                "
+              >
+                Closing note
+              </p>
+
+              <p
+                className="
+                  mt-4
+                  max-w-3xl
+
+                  text-lg
+                  font-medium
+
+                  leading-8
+
+                  tracking-[-0.025em]
+
+                  text-zinc-700
+
+                  sm:text-xl
+                  sm:leading-9
+
+                  dark:text-zinc-300
+                "
+              >
+                I use these articles to
+                document practical lessons
+                from building, maintaining,
+                debugging and delivering
+                real software.
+              </p>
+            </div>
           </article>
         </div>
       </section>
@@ -843,8 +1142,7 @@ export default function ArticleDetails() {
           dark:border-white/10
         "
       >
-        <motion.div
-          {...reveal}
+        <div
           className="
             mx-auto
             max-w-[1400px]
@@ -855,117 +1153,217 @@ export default function ArticleDetails() {
             lg:py-24
           "
         >
-          <p
+          <div
             className="
-              text-[10px]
-              font-semibold
-
-              uppercase
-              tracking-[0.2em]
-
-              text-zinc-400
-            "
-          >
-            Next article
-          </p>
-
-          <Link
-            to={`/articles/${nextArticle.slug}`}
-            className="
-              group
-
-              mt-5
-
               grid
               gap-8
 
-              border-t
-              border-zinc-200
-
-              pt-8
-
-              sm:grid-cols-[1fr_auto]
-              sm:items-end
-
-              dark:border-white/10
+              lg:grid-cols-2
             "
           >
-            <div>
-              <span
+            <Link
+              to={`/articles/${previousArticle.slug}`}
+              className="
+                group
+
+                border
+                border-zinc-200
+
+                p-6
+
+                transition-colors
+
+                hover:bg-zinc-50
+
+                sm:p-7
+
+                dark:border-white/10
+
+                dark:hover:bg-white/[0.025]
+              "
+            >
+              <div
                 className="
-                  font-mono
+                  flex
+                  items-center
 
-                  text-[10px]
-
-                  text-blue-600
-
-                  dark:text-blue-400
+                  gap-3
                 "
               >
-                {nextArticle.id}
-              </span>
+                <FiArrowLeft
+                  size={14}
+                  className="
+                    transition-transform
 
-              <h2
+                    group-hover:-translate-x-1
+                  "
+                />
+
+                <span
+                  className="
+                    text-[9px]
+                    font-semibold
+
+                    uppercase
+                    tracking-[0.17em]
+
+                    text-zinc-400
+                  "
+                >
+                  Previous article
+                </span>
+              </div>
+
+              <h3
                 className="
-                  mt-4
-                  max-w-[900px]
+                  mt-8
+                  max-w-xl
 
-                  text-[clamp(2rem,5vw,4.8rem)]
-
+                  text-2xl
                   font-medium
 
-                  leading-[1]
+                  leading-[1.1]
 
-                  tracking-[-0.055em]
+                  tracking-[-0.045em]
 
                   transition-colors
 
                   group-hover:text-blue-600
 
+                  sm:text-3xl
+
                   dark:group-hover:text-blue-400
                 "
               >
-                {nextArticle.title}
-              </h2>
-            </div>
+                {
+                  previousArticle.title
+                }
+              </h3>
 
-            <span
+              <p
+                className="
+                  mt-4
+
+                  text-xs
+
+                  text-zinc-400
+                "
+              >
+                {
+                  previousArticle.category
+                }{" "}
+                ·{" "}
+                {
+                  previousArticle.readTime
+                }
+              </p>
+            </Link>
+
+            <Link
+              to={`/articles/${nextArticle.slug}`}
               className="
-                flex
-                h-12
-                w-12
-                items-center
-                justify-center
+                group
 
                 border
                 border-zinc-200
 
-                text-zinc-500
+                p-6
 
-                transition-all
+                transition-colors
 
-                group-hover:border-blue-600
-                group-hover:bg-blue-600
-                group-hover:text-white
+                hover:bg-zinc-50
+
+                sm:p-7
 
                 dark:border-white/10
-                dark:text-zinc-400
 
-                dark:group-hover:border-blue-400
-                dark:group-hover:bg-blue-400
-                dark:group-hover:text-zinc-950
+                dark:hover:bg-white/[0.025]
               "
             >
-              <FiArrowRight
+              <div
                 className="
-                  transition-transform
+                  flex
+                  items-center
+                  justify-end
 
-                  group-hover:translate-x-1
+                  gap-3
                 "
-              />
-            </span>
-          </Link>
-        </motion.div>
+              >
+                <span
+                  className="
+                    text-[9px]
+                    font-semibold
+
+                    uppercase
+                    tracking-[0.17em]
+
+                    text-zinc-400
+                  "
+                >
+                  Next article
+                </span>
+
+                <FiArrowRight
+                  size={14}
+                  className="
+                    transition-transform
+
+                    group-hover:translate-x-1
+                  "
+                />
+              </div>
+
+              <h3
+                className="
+                  ml-auto
+                  mt-8
+                  max-w-xl
+
+                  text-right
+
+                  text-2xl
+                  font-medium
+
+                  leading-[1.1]
+
+                  tracking-[-0.045em]
+
+                  transition-colors
+
+                  group-hover:text-blue-600
+
+                  sm:text-3xl
+
+                  dark:group-hover:text-blue-400
+                "
+              >
+                {
+                  nextArticle.title
+                }
+              </h3>
+
+              <p
+                className="
+                  mt-4
+
+                  text-right
+
+                  text-xs
+
+                  text-zinc-400
+                "
+              >
+                {
+                  nextArticle.category
+                }{" "}
+                ·{" "}
+                {
+                  nextArticle.readTime
+                }
+              </p>
+            </Link>
+          </div>
+        </div>
       </section>
     </main>
   );

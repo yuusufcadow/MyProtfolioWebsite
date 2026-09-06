@@ -15,6 +15,8 @@ export interface Project {
 
   technologies: string[];
 
+  logoUrl?: string;
+
   liveUrl?: string;
 
   githubUrl?: string;

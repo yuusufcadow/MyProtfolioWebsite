@@ -154,16 +154,16 @@ export const portfolioData = {
       id: 1,
 
       title:
-        "Heegan Technology Website",
+        "Heegan Technology",
 
       slug:
-        "heegan-technology-website",
+        "heegan-technology",
 
       category:
-        "Corporate Website",
+        "Corporate Technology",
 
       description:
-        "Corporate technology website presenting Heegan Technology services and digital solutions through a modern responsive frontend.",
+        "Corporate technology website presenting services and digital solutions through a modern and responsive web experience.",
 
       contribution:
         "Built and contributed to the production frontend as part of my work at Heegan Technology.",
@@ -171,7 +171,14 @@ export const portfolioData = {
       organization:
         "Heegan Technology",
 
-      technologies: [],
+      technologies: [
+        "Frontend Development",
+        "Responsive UI",
+        "Production",
+      ],
+
+      logoUrl:
+        "https://heegantechnology.com/favicon.ico",
 
       liveUrl:
         "https://heegantechnology.com/",
@@ -184,24 +191,31 @@ export const portfolioData = {
       id: 2,
 
       title:
-        "Somali Surgical Society Website",
+        "Somali Surgical Society",
 
       slug:
         "somali-surgical-society",
 
       category:
-        "Healthcare Website",
+        "Healthcare",
 
       description:
         "Responsive professional organization website supporting healthcare information sharing and public visibility.",
 
       contribution:
-        "Contributed to the delivery of the production website as part of my professional work.",
+        "Contributed to the delivery and production implementation of the website.",
 
       organization:
         "Somali Surgical Society",
 
-      technologies: [],
+      technologies: [
+        "Web Development",
+        "Responsive UI",
+        "Production",
+      ],
+
+      logoUrl:
+        "https://somalisurgicalsociety.org/favicon.ico",
 
       liveUrl:
         "https://somalisurgicalsociety.org/",
@@ -220,18 +234,25 @@ export const portfolioData = {
         "ultimate-security-services",
 
       category:
-        "Service Website",
+        "Security Services",
 
       description:
-        "Professional security-services website with a clean responsive interface for company information and service presentation.",
+        "Professional security-services website designed for clear company information, service presentation and responsive use.",
 
       contribution:
-        "Contributed to the website delivery and production interface work.",
+        "Contributed to the website delivery and production frontend work.",
 
       organization:
         "Ultimate Security Services",
 
-      technologies: [],
+      technologies: [
+        "Frontend Development",
+        "Responsive UI",
+        "Production",
+      ],
+
+      logoUrl:
+        "https://usssomalia.com/favicon.ico",
 
       liveUrl:
         "https://usssomalia.com/",
@@ -250,7 +271,7 @@ export const portfolioData = {
         "dreamland-limited",
 
       category:
-        "Corporate Website",
+        "Corporate",
 
       description:
         "Corporate business website created for clear company and service presentation across desktop and mobile devices.",
@@ -261,7 +282,14 @@ export const portfolioData = {
       organization:
         "Dreamland Limited",
 
-      technologies: [],
+      technologies: [
+        "Web Development",
+        "Responsive UI",
+        "Production",
+      ],
+
+      logoUrl:
+        "https://dreamlandltd.com/favicon.ico",
 
       liveUrl:
         "https://dreamlandltd.com/",
@@ -274,7 +302,7 @@ export const portfolioData = {
       id: 5,
 
       title:
-        "Ministry of Agriculture and Irrigation - Galmudug",
+        "Ministry of Agriculture and Irrigation",
 
       slug:
         "ministry-agriculture-irrigation-galmudug",
@@ -283,15 +311,22 @@ export const portfolioData = {
         "Public Sector",
 
       description:
-        "Public-sector ministry website designed for structured information delivery, accessibility and responsive use.",
+        "Public-sector website designed for structured information delivery, accessibility and responsive use.",
 
       contribution:
-        "Contributed to the production website as part of public-sector project delivery.",
+        "Contributed to the production delivery of the Galmudug ministry website.",
 
       organization:
         "Ministry of Agriculture and Irrigation - Galmudug",
 
-      technologies: [],
+      technologies: [
+        "Public Sector",
+        "Responsive UI",
+        "Web Development",
+      ],
+
+      logoUrl:
+        "https://moagi.gm.so/favicon.ico",
 
       liveUrl:
         "https://moagi.gm.so/",
@@ -313,15 +348,28 @@ export const portfolioData = {
         "Business Website",
 
       description:
-        "Business website delivered as part of my professional website and application project experience.",
+        "Business website presenting Sarmaan Coffee, its brand and customer-facing digital presence through a responsive web experience.",
 
       contribution:
-        "Contributed to project delivery as part of my professional development work.",
+        "Contributed to the website as part of my professional project delivery experience.",
 
-      technologies: [],
+      organization:
+        "Sarmaan Coffee",
+
+      technologies: [
+        "Web Development",
+        "Responsive UI",
+        "Production",
+      ],
+
+      logoUrl:
+        "https://www.sarmaancoffee.com/favicon.ico",
+
+      liveUrl:
+        "https://www.sarmaancoffee.com/",
 
       featured:
-        false,
+        true,
     },
 
     {
@@ -337,12 +385,18 @@ export const portfolioData = {
         "Business Website",
 
       description:
-        "Client-focused website delivered as part of my professional web development experience.",
+        "Client-focused business website delivered as part of my professional website and software project experience.",
 
       contribution:
         "Contributed to project delivery as part of my professional development work.",
 
-      technologies: [],
+      organization:
+        "Tokyo Optical and Watch",
+
+      technologies: [
+        "Web Development",
+        "Responsive UI",
+      ],
 
       featured:
         false,
